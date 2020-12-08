@@ -46,6 +46,7 @@ nlu:
     - how do I find out updates
     - I'd like to sign up for updates
     - Subscribe to product updates
+    - subscribe to updates
 
 - regex: email
   examples: |
