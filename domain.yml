@@ -21,6 +21,7 @@ intents:
 entities:
 - email #regex for now... improve with function later?
 - color #make this a lookup table?
+- number
 responses:
   utter_greet:
   - text: "Hi there! I'm a demo bot from Rasa to help you with ordering shoes. How can I help you?"
@@ -66,13 +67,21 @@ responses:
   - text: We accept all major credit cards, Apple Pay, Google Pay, and PayPal.
   utter_promotions:
   - text: Currently, we're running a buy one get one half off promotion!
+  
   utter_product_stock_start:
   - text: I can help you find the stock of a product!
+  utter_ask_product_stock_form_number:
+  - text: What size shoe would you like?
+  utter_ask_product_stock_form_color:
+  - text: What color are you looking for?
+  utter_product_stock_finish:
+  - text: Looks like we have {color} shoes size {number} in stock!
+
 slots:
   email:
     type: text
     influence_conversation: false
-  size: # add duckling for this?
+  number: # should be duckling entity
     type: text
     influence_conversation: false
   color:
@@ -95,10 +104,10 @@ forms:
     email:
       - type: from_entity
         entity: email   
-  product_search_form:
-    size:
+  product_stock_form:
+    number:
       - type: from_entity
-        entity: size
+        entity: number
     color:
       - type: from_entity
         entity: color

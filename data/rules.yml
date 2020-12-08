@@ -82,4 +82,23 @@ rules:
   - active_loop: null
   - slot_was_set:
     - email
-  - action: utter_return_finish
+  - action: utter_product_updates_finish
+
+  # product stock
+- rule: Activate form for product stock search
+  steps:
+  - intent: product_stock
+  - action: utter_product_stock_start
+  - action: product_stock_form
+  - active_loop: product_stock_form
+
+- rule: Submit product stock form
+  condition:
+  - active_loop: product_stock_form
+  steps:
+  - action: product_stock_form
+  - active_loop: null
+  - action: utter_product_stock_finish
+  - slot_was_set:
+    - number: null
+    - color: null
