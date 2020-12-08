@@ -1,0 +1,85 @@
+version: "2.0"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+# order status
+
+- rule: Activate email form for order status
+  steps:
+  - intent: order_status
+  - action: order_status_form
+  - active_loop: order_status_form
+
+- rule: Submit order status form
+  condition:
+  - active_loop: order_status_form
+  steps:
+  - action: order_status_form
+  - active_loop: null
+  - slot_was_set:
+    - email
+  - action: utter_order_status
+
+# cancel order
+
+- rule: Activate email form for cancelling order
+  steps:
+  - intent: order_cancel
+  - action: cancel_form
+  - active_loop: cancel_form
+
+- rule: Submit cancel form
+  condition:
+  - active_loop: cancel_form
+  steps:
+  - action: cancel_form
+  - active_loop: null
+  - slot_was_set:
+    - email
+  - action: utter_order_cancel_finish
+
+# return item
+
+- rule: Activate email form for returning item
+  steps:
+  - intent: return
+  - action: return_form
+  - active_loop: return_form
+
+- rule: Submit return form
+  condition:
+  - active_loop: return_form
+  steps:
+  - action: return_form
+  - active_loop: null
+  - slot_was_set:
+    - email
+  - action: utter_return_finish
+
+# product updates
+
+- rule: Activate email form for product updates
+  steps:
+  - intent: product_updates
+  - action: product_updates_form
+  - active_loop: product_updates_form
+
+- rule: Submit updates form
+  condition:
+  - active_loop: product_updates_form
+  steps:
+  - action: product_updates_form
+  - active_loop: null
+  - slot_was_set:
+    - email
+  - action: utter_return_finish

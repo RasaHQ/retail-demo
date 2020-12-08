@@ -1,0 +1,104 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- order_status
+- order_cancel
+- return
+- payment_methods
+- promotions
+- product_stock
+- product_updates
+- greet
+- goodbye
+- affirm
+- deny
+- mood_great
+- mood_unhappy
+- bot_challenge
+- inform
+- out_of_scope
+entities:
+- email #regex for now... improve with function later?
+- color #make this a lookup table?
+responses:
+  utter_greet:
+  - text: "Hi there! I'm a demo bot from Rasa to help you with ordering shoes. How can I help you?"
+    buttons:
+    - title: "Check status of my order"
+      payload: "Check status of my order"
+    - title: "Start a return"
+      payload: "Start a return"
+    - title: "Check inventory"
+      payload: "Check inventory"
+    - title: "Subscribe to product updates"
+      payload: "Subscribe to product updates"
+  utter_cheer_up:
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Here is something to cheer you up:'
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_ask_order_status_form_email:
+  - text: I can help you find the status of your order. What's your email address so I can find the order?
+  utter_order_status:
+  - text: Based on the latest order from {email}, it looks like your order should arrive in a few days.
+  - text: Your order is showing as delivered.
+  - text: Your order is still processing.
+  utter_ask_cancel_form_email:
+  - text: Sorry to hear you want to cancel! To help find your order, can you please provide your email address?
+  utter_order_cancel_finish:
+  - text: Ok, I've cancelled your order. If you'd like to reorder, please visit your recent orders in your account history.
+  utter_ask_return_form_email:
+  - text: Let's start that return. To help find your order, can you please provide your email address?
+  utter_return_finish:
+  - text: Ok, I've kicked off your return. You should be receiving a return label in your inbox. Please send it in the next 14 days!
+  utter_ask_product_updates_form_email:
+  - text: I can keep you up to date with our weekly email about product updates! If you'd like to be added to the list, please add your email address.
+  utter_product_updates_finish:
+  - text: Alright, you're subscribed!
+  utter_payment_methods:
+  - text: We accept all major credit cards, Apple Pay, Google Pay, and PayPal.
+  utter_promotions:
+  - text: Currently, we're running a buy one get one half off promotion!
+  utter_product_stock_start:
+  - text: I can help you find the stock of a product!
+slots:
+  email:
+    type: text
+    influence_conversation: false
+  size: # add duckling for this?
+    type: text
+    influence_conversation: false
+  color:
+    type: text
+    influence_conversation: false
+forms:
+  order_status_form:
+    email:
+      - type: from_entity
+        entity: email
+  cancel_form:
+    email:
+      - type: from_entity
+        entity: email   
+  return_form:
+    email:
+      - type: from_entity
+        entity: email   
+  product_updates_form:
+    email:
+      - type: from_entity
+        entity: email   
+  product_search_form:
+    size:
+      - type: from_entity
+        entity: size
+    color:
+      - type: from_entity
+        entity: color
