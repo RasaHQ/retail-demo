@@ -28,6 +28,7 @@ stories:
   - intent: deny
   - action: utter_goodbye
 
+# use response selector for bottom 2
 - story: payment_methods
   steps:
   - intent: payment_methods
