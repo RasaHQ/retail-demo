@@ -1,3 +1,5 @@
+version: "2.0"
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
@@ -19,8 +21,8 @@ intents:
 - inform
 - out_of_scope
 entities:
-- email #regex for now... improve with function later?
-- color #make this a lookup table?
+- email
+- color
 - number
 responses:
   utter_greet:
@@ -45,26 +47,32 @@ responses:
   - text: Bye
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
+  
   utter_ask_order_status_form_email:
   - text: I can help you find the status of your order. What's your email address so I can find the order?
   utter_order_status:
   - text: Based on the latest order from {email}, it looks like your order should arrive in a few days.
-  - text: Your order is showing as delivered.
-  - text: Your order is still processing.
+  # - text: Your order is showing as delivered.
+  # - text: Your order is still processing.
+  
   utter_ask_cancel_form_email:
   - text: Sorry to hear you want to cancel! To help find your order, can you please provide your email address?
   utter_order_cancel_finish:
   - text: Ok, I've cancelled your order. If you'd like to reorder, please visit your recent orders in your account history.
+  
   utter_ask_return_form_email:
   - text: Let's start that return. To help find your order, can you please provide your email address?
   utter_return_finish:
   - text: Ok, I've kicked off your return. You should be receiving a return label in your inbox. Please send it in the next 14 days!
+  
   utter_ask_product_updates_form_email:
   - text: I can keep you up to date with our weekly email about product updates! If you'd like to be added to the list, please add your email address.
   utter_product_updates_finish:
   - text: Alright, you're subscribed!
+  
   utter_payment_methods:
   - text: We accept all major credit cards, Apple Pay, Google Pay, and PayPal.
+  
   utter_promotions:
   - text: Currently, we're running a buy one get one half off promotion!
   
@@ -74,8 +82,8 @@ responses:
   - text: What size shoe would you like?
   utter_ask_product_stock_form_color:
   - text: What color are you looking for?
-  utter_product_stock_finish:
-  - text: Looks like we have {color} shoes size {number} in stock!
+  utter_product_stock_finish: # will change this to query sqlite with search criteria
+  - text: Looks like we have size {number} {color} shoes in stock!
 
 slots:
   email:
@@ -111,3 +119,6 @@ forms:
     color:
       - type: from_entity
         entity: color
+
+actions: 
+  - action_product_search
