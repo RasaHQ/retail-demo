@@ -10,7 +10,6 @@ pipeline:
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
-  - name: RegexFeaturizer
   - name: CountVectorsFeaturizer
     analyzer: char_wb
     min_ngram: 1
@@ -28,7 +27,7 @@ pipeline:
     # url of the running duckling server
     url: "http://localhost:8000"
     # dimensions to extract
-    dimensions: ["number"]
+    dimensions: ["number", "email"]
     # allows you to configure the locale, by default the language is
     # used
     # locale: "de_DE"

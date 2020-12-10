@@ -26,8 +26,6 @@ rules:
   steps:
   - action: order_status_form
   - active_loop: null
-  - slot_was_set:
-    - email
   - action: utter_order_status
 
 # cancel order
@@ -44,8 +42,6 @@ rules:
   steps:
   - action: cancel_form
   - active_loop: null
-  - slot_was_set:
-    - email
   - action: utter_order_cancel_finish
 
 # return item
@@ -62,8 +58,6 @@ rules:
   steps:
   - action: return_form
   - active_loop: null
-  - slot_was_set:
-    - email
   - action: utter_return_finish
 
 # product updates
@@ -98,7 +92,4 @@ rules:
   steps:
   - action: product_stock_form
   - active_loop: null
-  - action: utter_product_stock_finish
-  - slot_was_set:
-    - number: null
-    - color: null
+  - action: action_product_search

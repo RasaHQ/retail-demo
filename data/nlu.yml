@@ -48,14 +48,14 @@ nlu:
     - Subscribe to product updates
     - subscribe to updates
 
-- regex: email
-  examples: |
-    - [a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+
+# - regex: email
+#   examples: |
+#     - [a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+
 - intent: inform
   examples: |
-    - [example@rasa.com](email)
-    - my email is [example@yahoo.com](email)
-    - it's [example@gmail.com](email)
+    - example@rasa.com
+    - my email is example@yahoo.com
+    - it's example@gmail.com
     - [black](color) shoes
     - [white](color) ones
     - I'm looking for [orange](color) shoes
