@@ -47,6 +47,11 @@ responses:
   - text: Bye
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
+  utter_out_of_scope:
+  - text: um, what did you just say to me?
+  - text: beep, boop, don't understand
+  utter_ask_rephrase:
+  - text: I don't think I understand. Can you try providing more detail?
   
   utter_ask_order_status_form_email:
   - text: I can help you find the status of your order. What's your email address so I can find the order?
@@ -85,6 +90,10 @@ responses:
   utter_product_stock_finish: # will change this to query sqlite with search criteria
   - text: Looks like we have size {number} {color} shoes in stock!
 
+  utter_confirm_email:
+  - text: I already have your email on file. Would you like me to look up your order under {email}?
+
+
 slots:
   email:
     type: text
@@ -95,11 +104,18 @@ slots:
   color:
     type: text
     influence_conversation: false
+  verified_email:
+    type: bool
+    influence_conversation: true
+
 forms:
   order_status_form:
     email:
       - type: from_entity
         entity: email
+      - intent:
+        - inform
+        type: from_text
   cancel_form:
     email:
       - type: from_entity
