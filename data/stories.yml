@@ -39,6 +39,18 @@ stories:
   - intent: promotions
   - action: utter_promotions
 
+# - story: confirm email when slot is already filled
+#   steps:
+#   - slot_was_set:
+#     - email
+#   - or:
+#     - intent: order_status
+#     - intent: order_cancel
+#     - intent: return
+#     - intent: product_updates
+#   - active_loop: null
+#   - action: utter_confirm_email
+
 # Try to use active_loop: null to then provide after response?
 # - story: open incident form interrupted
 #   steps:

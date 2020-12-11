@@ -25,8 +25,8 @@ class ActionProductSearch(Action):
 
         dispatcher.utter_message(template = "utter_product_stock_finish")
         reset_slots = ["number", "color"]
-        # return [SlotSet(slot, None) for slot in reset_slots]
-        return []
+        return [SlotSet(slot, None) for slot in reset_slots]
+        # return []
 
 # class ActionGreetUser(Action):
 #     def name(self) -> Text:
