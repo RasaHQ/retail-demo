@@ -1,5 +1,4 @@
 version: "2.0"
-
 nlu:
 - intent: order_status
   examples: |
@@ -8,30 +7,30 @@ nlu:
     - when will they get here
     - I'd like to check the status of my order pls
     - check status
-
+    - Check status of my order
+    - I haven't received my order yet, can we check that?
+    - where is my order?
 - intent: order_cancel
   examples: |
     - i'd like to cancel my order
     - cancel my shoes
     - I changed my mind on my order
     - cancel my order
-
 - intent: return
   examples: |
     - start a return
     - I don't want my shoes anymore
     - how do I return these?
-
+    - Which items are available to return?
+    - Start a return
 - intent: payment_methods
   examples: |
     - what kind of payment methods do you offer?
     - how do I pay
-
 - intent: promotions
   examples: |
     - what kind of deals do you have
     - are you running anything for black friday
-
 - intent: product_stock
   examples: |
     - do you have any [black](color) shoes in stock?
@@ -39,7 +38,8 @@ nlu:
     - what's your inventory
     - are you out of size 9 shoes
     - check inventory
-
+    - do you have my special shoes in stock
+    - Check inventory
 - intent: product_updates
   examples: |
     - what's new on the site?
@@ -47,10 +47,6 @@ nlu:
     - I'd like to sign up for updates
     - Subscribe to product updates
     - subscribe to updates
-
-# - regex: email
-#   examples: |
-#     - [a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+
 - intent: inform
   examples: |
     - example@rasa.com
@@ -60,7 +56,10 @@ nlu:
     - [white](color) ones
     - I'm looking for [orange](color) shoes
     - [brown](color)
-
+    - [blue](color)
+    - it's a@b.com
+    - xyz@hulaloo.ai
+    - gray
 - intent: greet
   examples: |
     - hey
@@ -76,7 +75,7 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
-
+    - yo
 - intent: goodbye
   examples: |
     - good afternoon
@@ -90,7 +89,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
 - intent: affirm
   examples: |
     - yes
@@ -99,7 +97,6 @@ nlu:
     - of course
     - that sounds good
     - correct
-
 - intent: deny
   examples: |
     - no
@@ -109,7 +106,6 @@ nlu:
     - don't like that
     - no way
     - not really
-
 - intent: mood_great
   examples: |
     - perfect
@@ -126,7 +122,7 @@ nlu:
     - so so perfect
     - so good
     - so perfect
-
+    - cool beans
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -143,14 +139,12 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
 - intent: bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-
 - intent: out_of_scope
   examples: |
     - what is the square root of 5
@@ -165,21 +159,7 @@ nlu:
     - I want to order a pizza
     - what is the weather today
     - what is the weather
-
-- lookup: color
+- intent: nlu_fallback
   examples: |
-    - black
-    - white
-    - yellow
-    - green
-    - blue
-    - pink
-    - gray
-    - orange
-
-
-
-
-
-
-
+    - mmm I can't see what you're saying
+    - I am looking forward to my best friend's wedding. Do you have any tuxedo's?
