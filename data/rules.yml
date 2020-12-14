@@ -12,13 +12,36 @@ rules:
   - intent: bot_challenge
   - action: utter_iamabot
 
+- rule: out of scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
+- rule: Implementation of the Two-Stage-Fallback
+  steps:
+  - intent: nlu_fallback
+  - action: action_two_stage_fallback
+  - active_loop: action_two_stage_fallback
+
 # order status
 
 - rule: Activate email form for order status
+  # condition:
+  # - slot_was_set:
+  #   - email: null
   steps:
   - intent: order_status
   - action: order_status_form
   - active_loop: order_status_form
+
+# - rule: Activate email form for order status
+#   condition:
+#   - slot_was_set:
+#     - email
+#   - active_loop: null
+#   steps:
+#   - intent: order_status
+#   - action: utter_confirm_email
 
 - rule: Submit order status form
   condition:
