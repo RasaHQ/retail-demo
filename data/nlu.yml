@@ -7,6 +7,7 @@ nlu:
     - when will they get here
     - I'd like to check the status of my order pls
     - check status
+    - I'd like an update on my order
     - Check status of my order
     - I haven't received my order yet, can we check that?
     - where is my order?
@@ -21,6 +22,7 @@ nlu:
     - start a return
     - I don't want my shoes anymore
     - how do I return these?
+    - return some shoes
     - Which items are available to return?
     - Start a return
 - intent: payment_methods
@@ -57,6 +59,7 @@ nlu:
     - I'm looking for [orange](color) shoes
     - [brown](color)
     - [blue](color)
+    - it's 123
     - it's a@b.com
     - xyz@hulaloo.ai
     - gray
@@ -159,6 +162,17 @@ nlu:
     - I want to order a pizza
     - what is the weather today
     - what is the weather
+    - why is the sky blue
+- lookup: color
+  examples: |
+    - black
+    - white
+    - yellow
+    - green
+    - blue
+    - pink
+    - gray
+    - orange
 - intent: nlu_fallback
   examples: |
     - mmm I can't see what you're saying
