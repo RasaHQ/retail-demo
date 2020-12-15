@@ -20,6 +20,10 @@ pipeline:
   # - name: RegexEntityExtractor
   - name: ResponseSelector
     epochs: 100
+    retrieval_intent: faq
+  - name: ResponseSelector
+    epochs: 100
+    retrieval_intent: chitchat
   - name: FallbackClassifier
     threshold: 0.3
     ambiguity_threshold: 0.1
