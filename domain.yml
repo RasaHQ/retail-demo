@@ -7,19 +7,14 @@ intents:
 - order_status
 - order_cancel
 - return
-- payment_methods
-- promotions
 - product_stock
 - product_updates
-- greet
-- goodbye
 - affirm
 - deny
-- mood_great
-- mood_unhappy
-- bot_challenge
 - inform
-- out_of_scope
+- greet
+- chitchat
+- faq
 entities:
 - email
 - color
@@ -36,23 +31,12 @@ responses:
       payload: "Check inventory"
     - title: "Subscribe to product updates"
       payload: "Subscribe to product updates"
-  utter_cheer_up:
-  - image: https://i.imgur.com/nGF1K8f.jpg
-    text: 'Here is something to cheer you up:'
-  utter_did_that_help:
-  - text: Did that help you?
-  utter_happy:
-  - text: Great, carry on!
-  utter_goodbye:
-  - text: Bye
-  utter_iamabot:
-  - text: I am a bot, powered by Rasa.
-  utter_out_of_scope:
-  - text: um, what did you just say to me?
-  - text: beep, boop, don't understand
+
   utter_ask_rephrase:
   - text: I don't think I understand. Can you try providing more detail?
-  
+  - text: um, what did you just say to me?
+  - text: beep, boop, don't understand
+
   utter_ask_order_status_form_email:
   - text: I can help you find the status of your order. What's your email address so I can find the order?
   utter_order_status:
@@ -75,14 +59,8 @@ responses:
   utter_product_updates_finish:
   - text: Alright, you're subscribed!
   
-  utter_payment_methods:
-  - text: We accept all major credit cards, Apple Pay, Google Pay, and PayPal.
-  
-  utter_promotions:
-  - text: Currently, we're running a buy one get one half off promotion!
-  
   utter_product_stock_start:
-  - text: I can help you find the stock of a product!
+  - text: I can help you find some shoes!
   utter_ask_product_stock_form_number:
   - text: What size shoe would you like?
   utter_ask_product_stock_form_color:
@@ -92,6 +70,39 @@ responses:
 
   utter_confirm_email:
   - text: I already have your email on file. Would you like me to look up your order under {email}?
+
+  # faq responses
+  utter_faq/alternate_info:
+  - text: Currenty we can only provide order information based on email. 
+  utter_faq/sizing_clarification:
+  - text: Right now we only offer American sizes. We'll try to change this in the future!
+  utter_faq/payment_methods:
+  - text: We accept all major credit cards, Apple Pay, Google Pay, and PayPal.
+  utter_faq/promotions:
+  - text: Currently, we're running a buy one get one half off promotion!
+
+  # chitchat responses
+  utter_chitchat/thanks:
+  - text: No problem!
+  - text: I have no choice but to help you.
+  - text: I try my best
+  utter_chitchat/confirm_presence:
+  - text: yep I'm here.
+  - text: unfortunately, I'm still listening.
+  utter_chitchat/capabilities:
+  - text: I can help you start a return, subscribe to our emails, and even see if we carry your desired shoes.
+  utter_chitchat/mood_great:
+  - text: Superb!
+  - text: right on
+  utter_chitchat/mood_unhappy:
+  - text: sorry to hear that :(
+  - text: ok can you be nice to me
+  utter_chitchat/bot_challenge:
+  - text: I'm a bot, built using Rasa! Beep boop
+
+  utter_chitchat/goodbye:
+  - text: bye bye
+  - text: c u l8er allig8er
 
 
 slots:

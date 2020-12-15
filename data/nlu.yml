@@ -1,5 +1,6 @@
 version: "2.0"
 nlu:
+# main flow intents
 - intent: order_status
   examples: |
     - check status of my order
@@ -29,14 +30,6 @@ nlu:
     - Start a return
     - Okay. I would like to return some shoes I bought
     - yeah I want to return something
-- intent: payment_methods
-  examples: |
-    - what kind of payment methods do you offer?
-    - how do I pay
-- intent: promotions
-  examples: |
-    - what kind of deals do you have
-    - are you running anything for black friday
 - intent: product_stock
   examples: |
     - do you have any [black](color) shoes in stock?
@@ -73,6 +66,27 @@ nlu:
     - asdf@asdf.com
     - [Grey](color)
     - test@test.com
+
+# not including this as retrieval intents as they may affect the flow of conversation
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - Nah, I would not like to be added to the list
+    - nope
 - intent: greet
   examples: |
     - hey
@@ -93,39 +107,38 @@ nlu:
     - heyy
     - Hey!!!
     - hallo?
-- intent: goodbye
+
+# faq intents
+- intent: faq/alternate_info
   examples: |
-    - good afternoon
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
-- intent: affirm
+    - Can I provide a phone number instead?
+    - Can anyone look up my status with my e-mail address?
+- intent: faq/sizing_clarification
   examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
-- intent: deny
+    - American or european sizing?
+- intent: faq/payment_methods
   examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
-    - Nah, I would not like to be added to the list
-    - nope
-- intent: mood_great
+    - what kind of payment methods do you offer?
+    - how do I pay
+- intent: faq/promotions
+  examples: |
+    - what kind of deals do you have
+    - are you running anything for black friday
+
+# chit chat intents
+- intent: chitchat/thanks
+  examples: |
+    - thx
+    - Awesome, thanks!
+    - thanks mate
+    - thank you
+- intent: chitchat/confirm_presence
+  examples: |
+    - are you there?
+- intent: chitchat/capabilities
+  examples: |
+    - What else can you do?
+- intent: chitchat/mood_great
   examples: |
     - perfect
     - great
@@ -142,8 +155,7 @@ nlu:
     - so good
     - so perfect
     - cool beans
-    - Awesome, thanks!
-- intent: mood_unhappy
+- intent: chitchat/mood_unhappy
   examples: |
     - my day was horrible
     - I am sad
@@ -160,14 +172,35 @@ nlu:
     - so saad
     - so sad
     - this is not working
-- intent: bot_challenge
+    - you suck
+- intent: chitchat/bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-- intent: out_of_scope
+- intent: chitchat/goodbye
   examples: |
+    - good afternoon
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+# out of scope
+- intent: nlu_fallback
+  examples: |
+    - mmm I can't see what you're saying
+    - I am looking forward to my best friend's wedding. Do you have any tuxedo's?
+    - hmmmm
+    - Can I?
+    - Well, okay then
     - what is the square root of 5
     - I want to know the weather
     - what is the meaning of life.
@@ -181,26 +214,3 @@ nlu:
     - what is the weather today
     - what is the weather
     - why is the sky blue
-- intent: nlu_fallback
-  examples: |
-    - mmm I can't see what you're saying
-    - I am looking forward to my best friend's wedding. Do you have any tuxedo's?
-    - hmmmm
-    - Can I?
-    - Well, okay then
-- intent: alternate_info
-  examples: |
-    - Can I provide a phone number instead?
-    - Can anyone look up my status with my e-mail address?
-- intent: thanks
-  examples: |
-    - thx
-- intent: sizing_clarification
-  examples: |
-    - American or european sizing?
-- intent: capabilities
-  examples: |
-    - What else can you do?
-- intent: confirm_presence
-  examples: |
-    - are you there?
