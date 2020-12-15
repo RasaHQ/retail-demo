@@ -1,43 +1,21 @@
 version: "2.0"
 
 stories:
-- story: happy path
+- story: intro
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
-
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
-
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
 
 # use response selector for bottom 2
-- story: payment_methods
-  steps:
-  - intent: payment_methods
-  - action: utter_payment_methods
+# - story: payment_methods
+#   steps:
+#   - intent: payment_methods
+#   - action: utter_payment_methods
 
-- story: promotions
-  steps:
-  - intent: promotions
-  - action: utter_promotions
+# - story: promotions
+#   steps:
+#   - intent: promotions
+#   - action: utter_promotions
 
 # - story: confirm email when slot is already filled
 #   steps:

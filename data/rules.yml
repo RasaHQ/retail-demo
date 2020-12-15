@@ -2,21 +2,17 @@ version: "2.0"
 
 rules:
 
-- rule: Say goodbye anytime the user says goodbye
+# retrieval rules
+- rule: respond to FAQs
   steps:
-  - intent: goodbye
-  - action: utter_goodbye
-
-- rule: Say 'I am a bot' anytime the user challenges
+  - intent: faq
+  - action: utter_faq
+- rule: respond to chitchat
   steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+  - intent: chitchat
+  - action: utter_chitchat
 
-- rule: out of scope
-  steps:
-  - intent: out_of_scope
-  - action: utter_out_of_scope
-
+# fallback
 - rule: Implementation of the Two-Stage-Fallback
   steps:
   - intent: nlu_fallback
