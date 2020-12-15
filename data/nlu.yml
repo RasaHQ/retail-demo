@@ -11,6 +11,8 @@ nlu:
     - Check status of my order
     - I haven't received my order yet, can we check that?
     - where is my order?
+    - I want to check the status of my order
+    - actually can I check the status of my order
 - intent: order_cancel
   examples: |
     - i'd like to cancel my order
@@ -25,6 +27,8 @@ nlu:
     - return some shoes
     - Which items are available to return?
     - Start a return
+    - Okay. I would like to return some shoes I bought
+    - yeah I want to return something
 - intent: payment_methods
   examples: |
     - what kind of payment methods do you offer?
@@ -42,6 +46,7 @@ nlu:
     - check inventory
     - do you have my special shoes in stock
     - Check inventory
+    - i'm looking for new shoes
 - intent: product_updates
   examples: |
     - what's new on the site?
@@ -63,6 +68,11 @@ nlu:
     - it's a@b.com
     - xyz@hulaloo.ai
     - gray
+    - [Maize](color) and [blue](color)
+    - wait actually that email is wrong. it should be asdf1@asdf.com
+    - asdf@asdf.com
+    - [Grey](color)
+    - test@test.com
 - intent: greet
   examples: |
     - hey
@@ -79,6 +89,10 @@ nlu:
     - goodevening
     - good afternoon
     - yo
+    - HEY
+    - heyy
+    - Hey!!!
+    - hallo?
 - intent: goodbye
   examples: |
     - good afternoon
@@ -109,6 +123,8 @@ nlu:
     - don't like that
     - no way
     - not really
+    - Nah, I would not like to be added to the list
+    - nope
 - intent: mood_great
   examples: |
     - perfect
@@ -126,6 +142,7 @@ nlu:
     - so good
     - so perfect
     - cool beans
+    - Awesome, thanks!
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -142,6 +159,7 @@ nlu:
     - extremly sad
     - so saad
     - so sad
+    - this is not working
 - intent: bot_challenge
   examples: |
     - are you a bot?
@@ -163,17 +181,26 @@ nlu:
     - what is the weather today
     - what is the weather
     - why is the sky blue
-- lookup: color
-  examples: |
-    - black
-    - white
-    - yellow
-    - green
-    - blue
-    - pink
-    - gray
-    - orange
 - intent: nlu_fallback
   examples: |
     - mmm I can't see what you're saying
     - I am looking forward to my best friend's wedding. Do you have any tuxedo's?
+    - hmmmm
+    - Can I?
+    - Well, okay then
+- intent: alternate_info
+  examples: |
+    - Can I provide a phone number instead?
+    - Can anyone look up my status with my e-mail address?
+- intent: thanks
+  examples: |
+    - thx
+- intent: sizing_clarification
+  examples: |
+    - American or european sizing?
+- intent: capabilities
+  examples: |
+    - What else can you do?
+- intent: confirm_presence
+  examples: |
+    - are you there?
