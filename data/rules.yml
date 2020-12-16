@@ -12,6 +12,7 @@ rules:
   steps:
   - intent: out_of_scope
   - action: utter_ask_rephrase
+
 - rule: Activate email form for order status
   steps:
   - intent: order_status
@@ -24,8 +25,7 @@ rules:
   - action: order_status_form
   - active_loop: null
   - action: utter_order_status
-  - action: survey_form
-  - active_loop: survey_form
+
 - rule: Activate email form for cancelling order
   steps:
   - intent: order_cancel
@@ -38,6 +38,7 @@ rules:
   - action: cancel_form
   - active_loop: null
   - action: utter_order_cancel_finish
+
 - rule: Activate email form for returning item
   steps:
   - intent: return
@@ -50,6 +51,7 @@ rules:
   - action: return_form
   - active_loop: null
   - action: utter_return_finish
+
 - rule: Activate email form for product updates
   steps:
   - intent: product_updates
@@ -64,6 +66,7 @@ rules:
   - slot_was_set:
     - email: filled
   - action: utter_product_updates_finish
+
 - rule: Activate form for product stock search
   steps:
   - intent: product_stock
@@ -77,10 +80,11 @@ rules:
   - action: product_stock_form
   - active_loop: null
   - action: action_product_search
+
 - rule: Submit survey
   condition:
   - active_loop: survey_form
   steps:
-  - action: order_status_form
+  - action: survey_form
   - active_loop: null
   - action: utter_survey_end
