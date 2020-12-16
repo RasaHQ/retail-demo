@@ -1,8 +1,5 @@
 version: "2.0"
-
 rules:
-
-# retrieval rules
 - rule: respond to FAQs
   steps:
   - intent: faq
@@ -11,39 +8,15 @@ rules:
   steps:
   - intent: chitchat
   - action: utter_chitchat
-
-# fallback
-- rule: Implementation of the Two-Stage-Fallback
-  steps:
-  - intent: nlu_fallback
-  - action: action_two_stage_fallback
-  - active_loop: action_two_stage_fallback
-
 - rule: out of scope
   steps:
   - intent: out_of_scope
   - action: utter_ask_rephrase
-
-# order status
-
 - rule: Activate email form for order status
-  # condition:
-  # - slot_was_set:
-  #   - email: null
   steps:
   - intent: order_status
   - action: order_status_form
   - active_loop: order_status_form
-
-# - rule: Activate email form for order status
-#   condition:
-#   - slot_was_set:
-#     - email
-#   - active_loop: null
-#   steps:
-#   - intent: order_status
-#   - action: utter_confirm_email
-
 - rule: Submit order status form
   condition:
   - active_loop: order_status_form
@@ -51,15 +24,13 @@ rules:
   - action: order_status_form
   - active_loop: null
   - action: utter_order_status
-
-# cancel order
-
+  - action: survey_form
+  - active_loop: survey_form
 - rule: Activate email form for cancelling order
   steps:
   - intent: order_cancel
   - action: cancel_form
   - active_loop: cancel_form
-
 - rule: Submit cancel form
   condition:
   - active_loop: cancel_form
@@ -67,15 +38,11 @@ rules:
   - action: cancel_form
   - active_loop: null
   - action: utter_order_cancel_finish
-
-# return item
-
 - rule: Activate email form for returning item
   steps:
   - intent: return
   - action: return_form
   - active_loop: return_form
-
 - rule: Submit return form
   condition:
   - active_loop: return_form
@@ -83,15 +50,11 @@ rules:
   - action: return_form
   - active_loop: null
   - action: utter_return_finish
-
-# product updates
-
 - rule: Activate email form for product updates
   steps:
   - intent: product_updates
   - action: product_updates_form
   - active_loop: product_updates_form
-
 - rule: Submit updates form
   condition:
   - active_loop: product_updates_form
@@ -99,17 +62,14 @@ rules:
   - action: product_updates_form
   - active_loop: null
   - slot_was_set:
-    - email
+    - email: filled
   - action: utter_product_updates_finish
-
-  # product stock
 - rule: Activate form for product stock search
   steps:
   - intent: product_stock
   - action: utter_product_stock_start
   - action: product_stock_form
   - active_loop: product_stock_form
-
 - rule: Submit product stock form
   condition:
   - active_loop: product_stock_form
@@ -117,3 +77,10 @@ rules:
   - action: product_stock_form
   - active_loop: null
   - action: action_product_search
+- rule: Submit survey
+  condition:
+  - active_loop: survey_form
+  steps:
+  - action: order_status_form
+  - active_loop: null
+  - action: utter_survey_end
