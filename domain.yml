@@ -170,5 +170,5 @@ forms:
     - entity: number
       type: from_entity
     open_feedback:
-    - intent: inform
+    - intent: None
       type: from_text
