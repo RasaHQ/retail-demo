@@ -1,63 +1,144 @@
-#### This file contains tests to evaluate that your bot behaves as expected.
-#### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
-
+version: "2.0"
 stories:
 - story: order status
   steps:
-  - user: |
+  - intent: greet
+    user: |-
       hi
-    intent: greet
   - action: utter_greet
-  - user: |
+  - intent: order_status
+    user: |-
       I'd like an update on my order
-    intent: order_status
   - action: order_status_form
   - active_loop: order_status_form
-  - user: |
-      it's [example@rasa.com](email)
-    intent: inform
+  - intent: inform
+    user: |-
+      it's example@rasa.com
   - action: order_status_form
   - active_loop: null
   - action: utter_order_status
-
 - story: cancel order
   steps:
-  - user: |
+  - intent: order_cancel
+    user: |-
       I need to cancel my order
-    intent: order_cancel
   - action: cancel_form
   - active_loop: cancel_form
-  - user: |
-      it's [example@rasa.com](email)
-    intent: inform
+  - intent: inform
+    user: |-
+      it's example@rasa.com
   - action: cancel_form
   - active_loop: null
   - action: utter_order_cancel_finish
-
 - story: return item
   steps:
-  - user: |
+  - intent: return
+    user: |-
       return some shoes
-    intent: return
   - action: return_form
   - active_loop: return_form
-  - user: |
-      it's [example@rasa.com](email)
-    intent: inform
+  - intent: inform
+    user: |-
+      it's example@rasa.com
   - action: return_form
   - active_loop: null
   - action: utter_return_finish
-
 - story: product updates
   steps:
-  - user: |
+  - intent: product_updates
+    user: |-
       subscribe to product updates
-    intent: product_updates
   - action: product_updates_form
   - active_loop: product_updates_form
-  - user: |
-      it's [example@rasa.com](email)
-    intent: inform
+  - intent: inform
+    user: |-
+      it's example@rasa.com
   - action: product_updates_form
   - active_loop: null
   - action: utter_product_updates_finish
+- story: Story from Conversation ID 9e646db44d5f4fa485876c2012a635a1
+  steps:
+  - intent: product_stock
+  - action: utter_product_stock_start
+  - action: product_stock_form
+  - active_loop: product_stock_form
+  - slot_was_set:
+    - requested_slot: number
+  - intent: faq
+  - action: utter_faq
+  - action: product_stock_form
+  - slot_was_set:
+    - requested_slot: number
+  - intent: inform
+    entities:
+    - number: 9
+  - slot_was_set:
+    - number: 9
+  - action: product_stock_form
+  - slot_was_set:
+    - number: 9
+  - slot_was_set:
+    - requested_slot: color
+  - intent: inform
+    entities:
+    - color: blue
+  - slot_was_set:
+    - color: blue
+  - action: product_stock_form
+  - slot_was_set:
+    - color: blue
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_product_search
+- story: Story from Conversation ID 827f58b86db24697a412d5318061f609
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: order_status
+  - action: order_status_form
+  - active_loop: order_status_form
+  - slot_was_set:
+    - requested_slot: email
+  - intent: inform
+    entities:
+    - email: xyz@hulaloo.ai
+  - slot_was_set:
+    - email: xyz@hulaloo.ai
+  - action: order_status_form
+  - slot_was_set:
+    - email: xyz@hulaloo.ai
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_order_status
+  - intent: chitchat
+  - action: utter_chitchat
+  - intent: out_of_scope
+  - action: utter_ask_rephrase
+- story: Story from Conversation ID 3fc427a10be74c9eaa65324f66d36341
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: order_status
+  - action: order_status_form
+  - active_loop: order_status_form
+  - slot_was_set:
+    - requested_slot: email
+  - intent: deny
+  - action: utter_greet
+- story: Story from Conversation ID c210fd5b47c04ea69fa5561d3b48da6b
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: return
+  - action: return_form
+  - active_loop: return_form
+  - slot_was_set:
+    - requested_slot: email
+  - intent: product_stock
+  - action: utter_product_stock_start
+  - action: product_stock_form
+  - active_loop: product_stock_form
+  - slot_was_set:
+    - requested_slot: number
