@@ -194,7 +194,7 @@ nlu:
     - see you later
 
 # out of scope
-- intent: nlu_fallback
+- intent: out_of_scope
   examples: |
     - mmm I can't see what you're saying
     - I am looking forward to my best friend's wedding. Do you have any tuxedo's?

@@ -19,6 +19,11 @@ rules:
   - action: action_two_stage_fallback
   - active_loop: action_two_stage_fallback
 
+- rule: out of scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_ask_rephrase
+
 # order status
 
 - rule: Activate email form for order status
