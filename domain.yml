@@ -134,6 +134,8 @@ responses:
     text: On a scale of 1-5, how would you rate your conversation today?
   utter_ask_survey_form_open_feedback:
   - text: Is there any other feedback you can provide?
+  utter_survey_end:
+  - text: Thank you for the feedback!
 actions:
 - action_product_search
 forms:
