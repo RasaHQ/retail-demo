@@ -1,5 +1,3 @@
-version: "2.0"
-
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
@@ -16,73 +14,90 @@ intents:
 - chitchat
 - faq
 - out_of_scope
+- nlu_fallback
 entities:
 - email
 - color
 - number
+slots:
+  color:
+    type: text
+    influence_conversation: false
+  email:
+    type: text
+    influence_conversation: false
+  number:
+    type: text
+    influence_conversation: false
+  open_feedback:
+    type: text
+    influence_conversation: false
+  requested_slot:
+    type: unfeaturized
+    influence_conversation: false
+  verified_email:
+    type: bool
+    influence_conversation: true
 responses:
   utter_greet:
-  - text: "Hi there! I'm a demo bot from Rasa to help you with ordering shoes. How can I help you?"
-    buttons:
-    - title: "Check status of my order"
-      payload: "Check status of my order"
-    - title: "Start a return"
-      payload: "Start a return"
-    - title: "Check inventory"
-      payload: "Check inventory"
-    - title: "Subscribe to product updates"
-      payload: "Subscribe to product updates"
-
+  - buttons:
+    - payload: Check status of my order
+      title: Check status of my order
+    - payload: Start a return
+      title: Start a return
+    - payload: Check inventory
+      title: Check inventory
+    - payload: Subscribe to product updates
+      title: Subscribe to product updates
+    text: Hi there! I'm a demo bot from Rasa to help you with ordering shoes. How
+      can I help you?
   utter_ask_rephrase:
   - text: I don't think I understand. Can you try providing more detail?
   - text: um, what did you just say to me?
   - text: beep, boop, don't understand
-
   utter_ask_order_status_form_email:
-  - text: I can help you find the status of your order. What's your email address so I can find the order?
+  - text: I can help you find the status of your order. What's your email address
+      so I can find the order?
   utter_order_status:
-  - text: Based on the latest order from {email}, it looks like your order should arrive in a few days.
-  # - text: Your order is showing as delivered.
-  # - text: Your order is still processing.
-  
+  - text: Based on the latest order from {email}, it looks like your order should
+      arrive in a few days.
   utter_ask_cancel_form_email:
-  - text: Sorry to hear you want to cancel! To help find your order, can you please provide your email address?
+  - text: Sorry to hear you want to cancel! To help find your order, can you please
+      provide your email address?
   utter_order_cancel_finish:
-  - text: Ok, I've cancelled your order. If you'd like to reorder, please visit your recent orders in your account history.
-  
+  - text: Ok, I've cancelled your order. If you'd like to reorder, please visit your
+      recent orders in your account history.
   utter_ask_return_form_email:
-  - text: Let's start that return. To help find your order, can you please provide your email address?
+  - text: Let's start that return. To help find your order, can you please provide
+      your email address?
   utter_return_finish:
-  - text: Ok, I've kicked off your return. You should be receiving a return label in your inbox. Please send it in the next 14 days!
-  
+  - text: Ok, I've kicked off your return. You should be receiving a return label
+      in your inbox. Please send it in the next 14 days!
   utter_ask_product_updates_form_email:
-  - text: I can keep you up to date with our weekly email about product updates! If you'd like to be added to the list, please add your email address.
+  - text: I can keep you up to date with our weekly email about product updates! If
+      you'd like to be added to the list, please add your email address.
   utter_product_updates_finish:
   - text: Alright, you're subscribed!
-  
   utter_product_stock_start:
   - text: I can help you find some shoes!
   utter_ask_product_stock_form_number:
   - text: What size shoe would you like?
   utter_ask_product_stock_form_color:
   - text: What color are you looking for?
-  utter_product_stock_finish: # will change this to query sqlite with search criteria
+  utter_product_stock_finish:
   - text: Looks like we have size {number} {color} shoes in stock!
-
   utter_confirm_email:
-  - text: I already have your email on file. Would you like me to look up your order under {email}?
-
-  # faq responses
+  - text: I already have your email on file. Would you like me to look up your order
+      under {email}?
   utter_faq/alternate_info:
-  - text: Currenty we can only provide order information based on email. 
+  - text: Currenty we can only provide order information based on email.
   utter_faq/sizing_clarification:
-  - text: Right now we only offer American sizes. We'll try to change this in the future!
+  - text: Right now we only offer American sizes. We'll try to change this in the
+      future!
   utter_faq/payment_methods:
   - text: We accept all major credit cards, Apple Pay, Google Pay, and PayPal.
   utter_faq/promotions:
   - text: Currently, we're running a buy one get one half off promotion!
-
-  # chitchat responses
   utter_chitchat/thanks:
   - text: No problem!
   - text: I have no choice but to help you.
@@ -91,7 +106,8 @@ responses:
   - text: yep I'm here.
   - text: unfortunately, I'm still listening.
   utter_chitchat/capabilities:
-  - text: I can help you start a return, subscribe to our emails, and even see if we carry your desired shoes.
+  - text: I can help you start a return, subscribe to our emails, and even see if
+      we carry your desired shoes.
   utter_chitchat/mood_great:
   - text: Superb!
   - text: right on
@@ -100,53 +116,57 @@ responses:
   - text: ok can you be nice to me
   utter_chitchat/bot_challenge:
   - text: I'm a bot, built using Rasa! Beep boop
-
   utter_chitchat/goodbye:
   - text: bye bye
   - text: c u l8er allig8er
-
-
-slots:
-  email:
-    type: text
-    influence_conversation: false
-  number: # should be duckling entity
-    type: text
-    influence_conversation: false
-  color:
-    type: text
-    influence_conversation: false
-  verified_email:
-    type: bool
-    influence_conversation: true
-
+  utter_ask_survey_form_number:
+  - buttons:
+    - payload: '1'
+      title: '1'
+    - payload: '2'
+      title: '2'
+    - payload: '3'
+      title: '3'
+    - payload: '4'
+      title: '4'
+    - payload: '5'
+      title: '5'
+    text: On a scale of 1-5, how would you rate your conversation today?
+  utter_ask_survey_form_open_feedback:
+  - text: Is there any other feedback you can provide?
+actions:
+- action_product_search
 forms:
   order_status_form:
     email:
-      - type: from_entity
-        entity: email
-      - intent:
-        - inform
-        type: from_text
+    - entity: email
+      type: from_entity
+    - intent:
+      - inform
+      type: from_text
   cancel_form:
     email:
-      - type: from_entity
-        entity: email   
+    - entity: email
+      type: from_entity
   return_form:
     email:
-      - type: from_entity
-        entity: email   
+    - entity: email
+      type: from_entity
   product_updates_form:
     email:
-      - type: from_entity
-        entity: email   
+    - entity: email
+      type: from_entity
   product_stock_form:
-    number:
-      - type: from_entity
-        entity: number
     color:
-      - type: from_entity
-        entity: color
-
-actions: 
-  - action_product_search
+    - entity: color
+      type: from_entity
+    number:
+    - entity: number
+      type: from_entity
+  survey_form:
+    number:
+    - entity: number
+      type: from_entity
+    open_feedback:
+    - intent: inform
+      type: from_text
