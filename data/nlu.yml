@@ -1,6 +1,5 @@
 version: "2.0"
 nlu:
-# main flow intents
 - intent: order_status
   examples: |
     - check status of my order
@@ -66,8 +65,6 @@ nlu:
     - asdf@asdf.com
     - [Grey](color)
     - test@test.com
-
-# not including this as retrieval intents as they may affect the flow of conversation
 - intent: affirm
   examples: |
     - yes
@@ -107,8 +104,6 @@ nlu:
     - heyy
     - Hey!!!
     - hallo?
-
-# faq intents
 - intent: faq/alternate_info
   examples: |
     - Can I provide a phone number instead?
@@ -124,8 +119,6 @@ nlu:
   examples: |
     - what kind of deals do you have
     - are you running anything for black friday
-
-# chit chat intents
 - intent: chitchat/thanks
   examples: |
     - thx
@@ -138,6 +131,7 @@ nlu:
 - intent: chitchat/capabilities
   examples: |
     - What else can you do?
+    - what can you do?
 - intent: chitchat/mood_great
   examples: |
     - perfect
@@ -192,8 +186,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
-# out of scope
 - intent: out_of_scope
   examples: |
     - mmm I can't see what you're saying
@@ -214,3 +206,4 @@ nlu:
     - what is the weather today
     - what is the weather
     - why is the sky blue
+    - blah blah blah

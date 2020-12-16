@@ -1,47 +1,181 @@
 version: "2.0"
-
 stories:
 - story: intro
   steps:
   - intent: greet
   - action: utter_greet
-
-# use response selector for bottom 2
-# - story: payment_methods
-#   steps:
-#   - intent: payment_methods
-#   - action: utter_payment_methods
-
-# - story: promotions
-#   steps:
-#   - intent: promotions
-#   - action: utter_promotions
-
-# - story: confirm email when slot is already filled
-#   steps:
-#   - slot_was_set:
-#     - email
-#   - or:
-#     - intent: order_status
-#     - intent: order_cancel
-#     - intent: return
-#     - intent: product_updates
-#   - active_loop: null
-#   - action: utter_confirm_email
-
-# Try to use active_loop: null to then provide after response?
-# - story: open incident form interrupted
-#   steps:
-#   - or:
-#     - intent: open_incident
-#     - intent: password_reset
-#     - intent: problem_email
-#   - action: open_incident_form
-#   - active_loop: open_incident_form
-#   - intent: help
-#   - action: utter_help
-#   - action: open_incident_form
-#   - active_loop: null
-#   - action: action_open_incident
-
-
+- story: cancel out of product form
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: product_stock
+  - action: utter_product_stock_start
+  - action: product_stock_form
+  - active_loop: product_stock_form
+  - slot_was_set:
+    - requested_slot: number
+  - intent: deny
+  - action: utter_greet
+- story: switch from product stock to return form
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: product_stock
+  - action: utter_product_stock_start
+  - action: product_stock_form
+  - active_loop: product_stock_form
+  - slot_was_set:
+    - requested_slot: number
+  - intent: return
+  - action: return_form
+  - active_loop: return_form
+  - slot_was_set:
+    - requested_slot: email
+  - intent: inform
+    entities:
+    - email: example@rasa.com
+  - slot_was_set:
+    - email: example@rasa.com
+  - action: return_form
+  - slot_was_set:
+    - email: example@rasa.com
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_return_finish
+- story: cancel out of return form
+  steps:
+  - intent: return
+  - action: return_form
+  - active_loop: return_form
+  - slot_was_set:
+    - requested_slot: email
+  - intent: deny
+  - action: utter_greet
+- story: cancel out of product updates form
+  steps:
+  - intent: product_updates
+  - action: product_updates_form
+  - active_loop: product_updates_form
+  - slot_was_set:
+    - requested_slot: email
+  - intent: deny
+  - action: utter_greet
+- story: start return form, switch to product updates
+  steps:
+  - intent: return
+  - action: return_form
+  - active_loop: return_form
+  - slot_was_set:
+    - requested_slot: email
+  - intent: product_updates
+  - action: product_updates_form
+  - active_loop: product_updates_form
+  - slot_was_set:
+    - requested_slot: email
+  - intent: inform
+    entities:
+    - email: ex@rasa.com
+  - slot_was_set:
+    - email: ex@rasa.com
+  - action: product_updates_form
+  - slot_was_set:
+    - email: ex@rasa.com
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_product_updates_finish
+- story: start in inventory search and switch to product updates
+  steps:
+  - intent: product_stock
+  - action: utter_product_stock_start
+  - action: product_stock_form
+  - active_loop: product_stock_form
+  - slot_was_set:
+    - requested_slot: number
+  - intent: product_updates
+  - action: product_updates_form
+  - active_loop: product_updates_form
+  - slot_was_set:
+    - requested_slot: email
+- story: product stock + faq digression
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: product_stock
+  - action: utter_product_stock_start
+  - action: product_stock_form
+  - active_loop: product_stock_form
+  - slot_was_set:
+    - requested_slot: number
+  - intent: faq
+  - action: utter_faq
+  - action: product_stock_form
+  - slot_was_set:
+    - requested_slot: number
+  - intent: inform
+    entities:
+    - number: 9
+  - slot_was_set:
+    - number: 9
+  - action: product_stock_form
+  - slot_was_set:
+    - number: 9
+  - slot_was_set:
+    - requested_slot: color
+  - intent: inform
+    entities:
+    - color: blue
+  - slot_was_set:
+    - color: blue
+  - action: product_stock_form
+  - slot_was_set:
+    - color: blue
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_product_search
+- story: product stock + chitchat digression
+  steps:
+  - intent: product_stock
+  - action: utter_product_stock_start
+  - action: product_stock_form
+  - active_loop: product_stock_form
+  - slot_was_set:
+    - requested_slot: number
+  - intent: chitchat
+  - action: utter_chitchat
+  - action: product_stock_form
+  - slot_was_set:
+    - requested_slot: number
+  - intent: inform
+    entities:
+    - color: Blue
+    - number: 9
+  - slot_was_set:
+    - color: Blue
+  - slot_was_set:
+    - number: 9
+  - action: product_stock_form
+  - slot_was_set:
+    - color: Blue
+  - slot_was_set:
+    - number: 9
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_product_search
+- story: random chit chat
+  steps:
+  - intent: out_of_scope
+  - action: utter_ask_rephrase
+  - intent: chitchat
+  - action: utter_chitchat
+  - intent: chitchat
+  - action: utter_chitchat/capabilities
+  - intent: out_of_scope
+    entities:
+    - number: 2
+  - slot_was_set:
+    - number: 2
+  - action: utter_ask_rephrase
