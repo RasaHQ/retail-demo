@@ -15,6 +15,7 @@ intents:
 - greet
 - chitchat
 - faq
+- out_of_scope
 entities:
 - email
 - color
