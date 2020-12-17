@@ -153,6 +153,7 @@ forms:
   return_form:
     email:
     - entity: email
+      not_intent: product_updates
       type: from_entity
   product_updates_form:
     email:

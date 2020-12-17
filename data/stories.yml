@@ -16,6 +16,7 @@ stories:
     - requested_slot: number
   - intent: deny
   - action: utter_greet
+
 - story: switch from product stock to return form
   steps:
   - intent: greet
@@ -29,20 +30,7 @@ stories:
   - intent: return
   - action: return_form
   - active_loop: return_form
-  - slot_was_set:
-    - requested_slot: email
-  - intent: inform
-    entities:
-    - email: example@rasa.com
-  - slot_was_set:
-    - email: example@rasa.com
-  - action: return_form
-  - slot_was_set:
-    - email: example@rasa.com
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: utter_return_finish
+
 - story: cancel out of return form
   steps:
   - intent: return
@@ -52,6 +40,7 @@ stories:
     - requested_slot: email
   - intent: deny
   - action: utter_greet
+
 - story: cancel out of product updates form
   steps:
   - intent: product_updates
@@ -61,30 +50,17 @@ stories:
     - requested_slot: email
   - intent: deny
   - action: utter_greet
-- story: start return form, switch to product updates
-  steps:
-  - intent: return
-  - action: return_form
-  - active_loop: return_form
-  - slot_was_set:
-    - requested_slot: email
-  - intent: product_updates
-  - action: product_updates_form
-  - active_loop: product_updates_form
-  - slot_was_set:
-    - requested_slot: email
-  - intent: inform
-    entities:
-    - email: ex@rasa.com
-  - slot_was_set:
-    - email: ex@rasa.com
-  - action: product_updates_form
-  - slot_was_set:
-    - email: ex@rasa.com
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: utter_product_updates_finish
+
+# - story: start return form, switch to product updates
+#   steps:
+#   - intent: return
+#   - action: return_form
+#   - active_loop: return_form
+#   - slot_was_set:
+#     - requested_slot: email
+#   - intent: product_updates
+#   - action: product_update_form
+
 - story: start in inventory search and switch to product updates
   steps:
   - intent: product_stock
@@ -96,8 +72,7 @@ stories:
   - intent: product_updates
   - action: product_updates_form
   - active_loop: product_updates_form
-  - slot_was_set:
-    - requested_slot: email
+
 - story: product stock + faq digression
   steps:
   - intent: greet
@@ -111,30 +86,7 @@ stories:
   - intent: faq
   - action: utter_faq
   - action: product_stock_form
-  - slot_was_set:
-    - requested_slot: number
-  - intent: inform
-    entities:
-    - number: 9
-  - slot_was_set:
-    - number: 9
-  - action: product_stock_form
-  - slot_was_set:
-    - number: 9
-  - slot_was_set:
-    - requested_slot: color
-  - intent: inform
-    entities:
-    - color: blue
-  - slot_was_set:
-    - color: blue
-  - action: product_stock_form
-  - slot_was_set:
-    - color: blue
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: action_product_search
+
 - story: product stock + chitchat digression
   steps:
   - intent: product_stock
@@ -146,22 +98,4 @@ stories:
   - intent: chitchat
   - action: utter_chitchat
   - action: product_stock_form
-  - slot_was_set:
-    - requested_slot: number
-  - intent: inform
-    entities:
-    - color: Blue
-    - number: 9
-  - slot_was_set:
-    - color: Blue
-  - slot_was_set:
-    - number: 9
-  - action: product_stock_form
-  - slot_was_set:
-    - color: Blue
-  - slot_was_set:
-    - number: 9
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: action_product_search
+

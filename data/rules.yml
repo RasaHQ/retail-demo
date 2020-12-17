@@ -25,6 +25,8 @@ rules:
   - action: order_status_form
   - active_loop: null
   - action: utter_order_status
+  - action: survey_form
+  - active_loop: survey_form
 
 - rule: Activate email form for cancelling order
   steps:
@@ -38,6 +40,8 @@ rules:
   - action: cancel_form
   - active_loop: null
   - action: utter_order_cancel_finish
+  - action: survey_form
+  - active_loop: survey_form
 
 - rule: Activate email form for returning item
   steps:
@@ -51,21 +55,35 @@ rules:
   - action: return_form
   - active_loop: null
   - action: utter_return_finish
+  - action: survey_form
+  - active_loop: survey_form
 
 - rule: Activate email form for product updates
   steps:
   - intent: product_updates
   - action: product_updates_form
   - active_loop: product_updates_form
+
+# - rule: Activate email form for product updates
+#   condition:
+#   - active_loop: return_form
+#   steps:
+#   - intent: product_updates
+#   - active_loop: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   - action: product_updates_form
+#   - active_loop: product_updates_form
+
 - rule: Submit updates form
   condition:
   - active_loop: product_updates_form
   steps:
   - action: product_updates_form
   - active_loop: null
-  - slot_was_set:
-    - email: filled
   - action: utter_product_updates_finish
+  - action: survey_form
+  - active_loop: survey_form
 
 - rule: Activate form for product stock search
   steps:
@@ -80,6 +98,8 @@ rules:
   - action: product_stock_form
   - active_loop: null
   - action: action_product_search
+  - action: survey_form
+  - active_loop: survey_form  
 
 - rule: Submit survey
   condition:
