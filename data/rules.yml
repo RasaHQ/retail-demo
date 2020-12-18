@@ -8,16 +8,28 @@ rules:
   steps:
   - intent: chitchat
   - action: utter_chitchat
+
 - rule: out of scope
   steps:
   - intent: out_of_scope
   - action: utter_ask_rephrase
 
+- rule: Implementation of the Two-Stage-Fallback
+  steps:
+  - intent: nlu_fallback
+  - action: action_two_stage_fallback
+  - active_loop: action_two_stage_fallback
+
+# order status
+
 - rule: Activate email form for order status
   steps:
   - intent: order_status
+  - action: action_deactivate_loop
+  - active_loop: null
   - action: order_status_form
   - active_loop: order_status_form
+
 - rule: Submit order status form
   condition:
   - active_loop: order_status_form
@@ -28,11 +40,16 @@ rules:
   - action: survey_form
   - active_loop: survey_form
 
+# cancel order
+
 - rule: Activate email form for cancelling order
   steps:
   - intent: order_cancel
+  - action: action_deactivate_loop
+  - active_loop: null
   - action: cancel_form
   - active_loop: cancel_form
+
 - rule: Submit cancel form
   condition:
   - active_loop: cancel_form
@@ -43,11 +60,16 @@ rules:
   - action: survey_form
   - active_loop: survey_form
 
+# return
+
 - rule: Activate email form for returning item
   steps:
   - intent: return
+  - action: action_deactivate_loop
+  - active_loop: null
   - action: return_form
   - active_loop: return_form
+
 - rule: Submit return form
   condition:
   - active_loop: return_form
@@ -58,22 +80,15 @@ rules:
   - action: survey_form
   - active_loop: survey_form
 
+# product updates
+
 - rule: Activate email form for product updates
   steps:
   - intent: product_updates
+  - action: action_deactivate_loop
+  - active_loop: null
   - action: product_updates_form
   - active_loop: product_updates_form
-
-# - rule: Activate email form for product updates
-#   condition:
-#   - active_loop: return_form
-#   steps:
-#   - intent: product_updates
-#   - active_loop: null
-#   - slot_was_set:
-#     - requested_slot: null
-#   - action: product_updates_form
-#   - active_loop: product_updates_form
 
 - rule: Submit updates form
   condition:
@@ -85,12 +100,17 @@ rules:
   - action: survey_form
   - active_loop: survey_form
 
+# product search
+
 - rule: Activate form for product stock search
   steps:
   - intent: product_stock
+  - action: action_deactivate_loop
+  - active_loop: null
   - action: utter_product_stock_start
   - action: product_stock_form
   - active_loop: product_stock_form
+
 - rule: Submit product stock form
   condition:
   - active_loop: product_stock_form
@@ -100,6 +120,8 @@ rules:
   - action: action_product_search
   - action: survey_form
   - active_loop: survey_form  
+
+# submit survey (activation is appended to each form)
 
 - rule: Submit survey
   condition:
