@@ -4,18 +4,55 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
-- story: cancel out of product form
+
+# cancel stories
+
+- story: User stops product_stock
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: product_stock
-  - action: utter_product_stock_start
-  - action: product_stock_form
   - active_loop: product_stock_form
-  - slot_was_set:
-    - requested_slot: number
   - intent: deny
+  - action: utter_start_over
   - action: utter_greet
+  - action: action_deactivate_loop
+  - active_loop: null
+
+- story: User stops order_status
+  steps:
+  - active_loop: order_status_form
+  - intent: deny
+  - action: utter_start_over
+  - action: utter_greet
+  - action: action_deactivate_loop
+  - active_loop: null
+
+- story: User stops cancel_form
+  steps:
+  - active_loop: cancel_form
+  - intent: deny
+  - action: utter_start_over
+  - action: utter_greet
+  - action: action_deactivate_loop
+  - active_loop: null
+
+- story: User stops return_form
+  steps:
+  - active_loop: return_form
+  - intent: deny
+  - action: utter_start_over
+  - action: utter_greet
+  - action: action_deactivate_loop
+  - active_loop: null
+
+- story: User stops product_updates_form
+  steps:
+  - active_loop: product_updates_form
+  - intent: deny
+  - action: utter_start_over
+  - action: utter_greet
+  - action: action_deactivate_loop
+  - active_loop: null
+
+# switch form stories
 
 - story: switch from product stock to return form
   steps:
@@ -31,25 +68,25 @@ stories:
   - action: return_form
   - active_loop: return_form
 
-- story: cancel out of return form
-  steps:
-  - intent: return
-  - action: return_form
-  - active_loop: return_form
-  - slot_was_set:
-    - requested_slot: email
-  - intent: deny
-  - action: utter_greet
+# - story: cancel out of return form
+#   steps:
+#   - intent: return
+#   - action: return_form
+#   - active_loop: return_form
+#   - slot_was_set:
+#     - requested_slot: email
+#   - intent: deny
+#   - action: utter_greet
 
-- story: cancel out of product updates form
-  steps:
-  - intent: product_updates
-  - action: product_updates_form
-  - active_loop: product_updates_form
-  - slot_was_set:
-    - requested_slot: email
-  - intent: deny
-  - action: utter_greet
+# - story: cancel out of product updates form
+#   steps:
+#   - intent: product_updates
+#   - action: product_updates_form
+#   - active_loop: product_updates_form
+#   - slot_was_set:
+#     - requested_slot: email
+#   - intent: deny
+#   - action: utter_greet
 
 # - story: start return form, switch to product updates
 #   steps:
@@ -60,6 +97,19 @@ stories:
 #     - requested_slot: email
 #   - intent: product_updates
 #   - action: product_update_form
+
+# - story: Story from Conversation ID 78f02059c69c4fb2bf4ccc65dc8059b2
+#   steps:
+#   - intent: return
+#   - action: return_form
+#   - active_loop: return_form
+#   - slot_was_set:
+#     - requested_slot: email
+#   - intent: product_updates
+#   - action: product_updates_form
+#   - active_loop: product_updates_form
+#   - slot_was_set:
+#     - requested_slot: email
 
 - story: start in inventory search and switch to product updates
   steps:

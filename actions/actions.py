@@ -28,17 +28,3 @@ class ActionProductSearch(Action):
         return [SlotSet(slot, None) for slot in reset_slots]
         # return []
 
-# class ActionGreetUser(Action):
-#     def name(self) -> Text:
-#         return "action_greet_user"
-
-#     def run(
-#         self,
-#         dispatcher: CollectingDispatcher,
-#         tracker: Tracker,
-#         domain: Dict[Text, Any],
-#     ) -> List[EventType]:
-
-#         dispatcher.utter_message(text = "Hi, User!")
-
-#         return []
