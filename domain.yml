@@ -136,8 +136,13 @@ responses:
   - text: Is there any other feedback you can provide?
   utter_survey_end:
   - text: Thank you for the feedback!
+  utter_start_over:
+  - text: Ok, let's start over.
+  utter_open_feedback: #this is to test the response was collected
+  - text: Here's your lovely feedback - {open_feedback}
 actions:
 - action_product_search
+- action_cancel_form
 forms:
   order_status_form:
     email:
@@ -171,5 +176,4 @@ forms:
     - entity: number
       type: from_entity
     open_feedback:
-    - intent: None
-      type: from_text
+    - type: from_text

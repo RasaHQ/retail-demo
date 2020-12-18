@@ -107,4 +107,5 @@ rules:
   steps:
   - action: survey_form
   - active_loop: null
+  - action: utter_open_feedback
   - action: utter_survey_end
