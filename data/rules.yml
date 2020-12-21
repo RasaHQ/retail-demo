@@ -37,8 +37,7 @@ rules:
   - action: order_status_form
   - active_loop: null
   - action: utter_order_status
-  - action: survey_form
-  - active_loop: survey_form
+  - action: action_survey_start
 
 # cancel order
 
@@ -57,8 +56,7 @@ rules:
   - action: cancel_form
   - active_loop: null
   - action: utter_order_cancel_finish
-  - action: survey_form
-  - active_loop: survey_form
+  - action: action_survey_start
 
 # return
 
@@ -77,8 +75,7 @@ rules:
   - action: return_form
   - active_loop: null
   - action: utter_return_finish
-  - action: survey_form
-  - active_loop: survey_form
+  - action: action_survey_start
 
 # product updates
 
@@ -97,8 +94,7 @@ rules:
   - action: product_updates_form
   - active_loop: null
   - action: utter_product_updates_finish
-  - action: survey_form
-  - active_loop: survey_form
+  - action: action_survey_start
 
 # product search
 
@@ -118,8 +114,7 @@ rules:
   - action: product_stock_form
   - active_loop: null
   - action: action_product_search
-  - action: survey_form
-  - active_loop: survey_form  
+  - action: action_survey_start
 
 # submit survey (activation is appended to each form)
 
@@ -129,5 +124,4 @@ rules:
   steps:
   - action: survey_form
   - active_loop: null
-  - action: utter_open_feedback
-  - action: utter_survey_end
+  - action: action_survey_submit
