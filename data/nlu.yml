@@ -13,6 +13,7 @@ nlu:
     - where is my order?
     - I want to check the status of my order
     - actually can I check the status of my order
+    - order status for example@rasa.com
 - intent: order_cancel
   examples: |
     - i'd like to cancel my order

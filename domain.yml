@@ -38,6 +38,9 @@ slots:
   verified_email:
     type: bool
     influence_conversation: true
+  survey_complete:
+    type: bool
+    influence_conversation: true
 responses:
   utter_greet:
   - buttons:
@@ -142,7 +145,8 @@ responses:
   - text: Here's your lovely feedback - {open_feedback}
 actions:
 - action_product_search
-- action_cancel_form
+- action_survey_start
+- action_survey_submit
 forms:
   order_status_form:
     email:
