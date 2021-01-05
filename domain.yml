@@ -62,13 +62,12 @@ responses:
   - text: I can help you find the status of your order. What's your email address
       so I can find the order?
   utter_order_status:
-  - text: Based on the latest order from {email}, it looks like your order should
-      arrive in a few days.
+  - text: Based on the latest order from {email}, it looks like your order is currently {status}.
   utter_ask_cancel_form_email:
   - text: Sorry to hear you want to cancel! To help find your order, can you please
       provide your email address?
   utter_order_cancel_finish:
-  - text: Ok, I've cancelled your order. If you'd like to reorder, please visit your
+  - text: Ok, I've cancelled the order for {email}. If you'd like to reorder, please visit your
       recent orders in your account history.
   utter_ask_return_form_email:
   - text: Let's start that return. To help find your order, can you please provide
@@ -143,10 +142,19 @@ responses:
   - text: Ok, let's start over.
   utter_open_feedback: #this is to test the response was collected
   - text: Here's your lovely feedback - {open_feedback}
+  utter_no_order:
+  - text: Hmm, seems like we don't have an order associated with that email
+  utter_in_stock:
+  - text: You're in luck! We have those in stock.
+  utter_no_stock:
+  - text: Sorry, seems like we don't have those shoes.
 actions:
 - action_product_search
 - action_survey_start
 - action_survey_submit
+- action_order_status
+- action_cancel_order
+- action_return
 forms:
   order_status_form:
     email:

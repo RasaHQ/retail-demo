@@ -1,1 +1,7 @@
 rasa-x-details
+.python-version
+read_db.py
+actions/__pycache__/*
+actions/actions.py
+.python-version
+actions/__pycache__/__init__.cpython-38.pyc
