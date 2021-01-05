@@ -18,7 +18,7 @@ jobs:
       uses: RasaHQ/action-server-gha@master
       # Full list of parameters: https://github.com/RasaHQ/action-server-gha/tree/master#input-arguments
       with:
-        docker_image_name: 'account_username/repository_name'
+        docker_image_name: 'cdesmar/retail-demo'
         docker_registry_login: ${{ secrets.DOCKER_HUB_LOGIN }}
         docker_registry_password: ${{ secrets.DOCKER_HUB_PASSWORD }}
         # More details about github context:
