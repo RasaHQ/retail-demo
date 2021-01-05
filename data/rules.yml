@@ -36,7 +36,7 @@ rules:
   steps:
   - action: order_status_form
   - active_loop: null
-  - action: utter_order_status
+  - action: action_order_status
   - action: action_survey_start
 
 # cancel order
@@ -55,7 +55,7 @@ rules:
   steps:
   - action: cancel_form
   - active_loop: null
-  - action: utter_order_cancel_finish
+  - action: action_cancel_order
   - action: action_survey_start
 
 # return
@@ -74,7 +74,7 @@ rules:
   steps:
   - action: return_form
   - active_loop: null
-  - action: utter_return_finish
+  - action: action_return
   - action: action_survey_start
 
 # product updates
