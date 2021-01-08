@@ -54,7 +54,7 @@ responses:
       title: Subscribe to product updates
     text: Hi there! I'm a demo bot from Rasa to help you with ordering shoes. How
       can I help you?
-  utter_ask_rephrase:
+  utter_default:
   - text: I don't think I understand. Can you try providing more detail?
   - text: um, what did you just say to me?
   - text: beep, boop, don't understand

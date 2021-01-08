@@ -11,14 +11,10 @@ rules:
 
 - rule: out of scope
   steps:
-  - intent: out_of_scope
-  - action: utter_ask_rephrase
-
-- rule: Implementation of the Two-Stage-Fallback
-  steps:
-  - intent: nlu_fallback
-  - action: action_two_stage_fallback
-  - active_loop: action_two_stage_fallback
+  - or:
+    - intent: nlu_fallback
+    - intent: out_of_scope
+  - action: utter_default
 
 # order status
 
