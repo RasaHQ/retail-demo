@@ -50,3 +50,6 @@ policies:
     max_history: 5
     epochs: 100
   - name: RulePolicy
+    core_fallback_threshold: 0.4
+    core_fallback_action_name: "action_default_fallback"
+    enable_fallback_prediction: True
