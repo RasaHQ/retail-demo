@@ -26,9 +26,14 @@ slots:
   email:
     type: text
     influence_conversation: false
-  number:
+  size:
     type: text
     influence_conversation: false
+    auto_fill: false
+  rating:
+    type: text
+    influence_conversation: false
+    auto_fill: false
   open_feedback:
     type: text
     influence_conversation: false
@@ -82,12 +87,12 @@ responses:
   - text: Alright, you're subscribed!
   utter_product_stock_start:
   - text: I can help you find some shoes!
-  utter_ask_product_stock_form_number:
+  utter_ask_product_stock_form_size:
   - text: What size shoe would you like?
   utter_ask_product_stock_form_color:
   - text: What color are you looking for?
   utter_product_stock_finish:
-  - text: Looks like we have size {number} {color} shoes in stock!
+  - text: Looks like we have size {size} {color} shoes in stock!
   utter_confirm_email:
   - text: I already have your email on file. Would you like me to look up your order
       under {email}?
@@ -121,7 +126,7 @@ responses:
   utter_chitchat/goodbye:
   - text: bye bye
   - text: c u l8er allig8er
-  utter_ask_survey_form_number:
+  utter_ask_survey_form_rating:
   - buttons:
     - payload: '1'
       title: '1'
@@ -177,14 +182,14 @@ forms:
     - entity: email
       type: from_entity
   product_stock_form:
+    size:
+    - entity: number
+      type: from_entity
     color:
     - entity: color
       type: from_entity
-    number:
-    - entity: number
-      type: from_entity
   survey_form:
-    number:
+    rating:
     - entity: number
       type: from_entity
     open_feedback:

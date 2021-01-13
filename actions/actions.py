@@ -1,14 +1,4 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/custom-actions
-
-
-# This is a simple example for a custom action which utters "Hello World!"
-
 from typing import Any, Text, Dict, List
-
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
@@ -28,28 +18,30 @@ class ActionProductSearch(Action):
     ) -> List[Dict[Text, Any]]:
 
         # connect to DB
-        conn = sqlite3.connect("example.db")
-        c = conn.cursor()
+        connection = sqlite3.connect("example.db")
+        cursor = connection.cursor()
 
-        # get slots
-        shoe = [(tracker.get_slot("color")), (tracker.get_slot("number"))]
+        # get slots and save as tuple
+        shoe = [(tracker.get_slot("color")), (tracker.get_slot("size"))]
 
-        # retrieve row based on search criteria
-        c.execute("SELECT * FROM inventory WHERE color=? AND size=?", shoe)
-        rw = c.fetchone()
+        # place cursor on correct row based on search criteria
+        cursor.execute("SELECT * FROM inventory WHERE color=? AND size=?", shoe)
+        
+        # retrieve sqlite row
+        data_row = cursor.fetchone()
 
-        if rw:
+        if data_row:
             # provide in stock message
             dispatcher.utter_message(template="utter_in_stock")
-            conn.close()
-            reset_slots = ["number", "color"]
-            return [SlotSet(slot, None) for slot in reset_slots]
+            connection.close()
+            slots_to_reset = ["size", "color"]
+            return [SlotSet(slot, None) for slot in slots_to_reset]
         else:
             # provide out of stock
             dispatcher.utter_message(template="utter_no_stock")
-            conn.close()
-            reset_slots = ["number", "color"]
-            return [SlotSet(slot, None) for slot in reset_slots]
+            connection.close()
+            slots_to_reset = ["size", "color"]
+            return [SlotSet(slot, None) for slot in slots_to_reset]
 
 
 class SurveyStart(Action):
@@ -64,9 +56,11 @@ class SurveyStart(Action):
     ) -> List[Dict[Text, Any]]:
 
         if tracker.get_slot("survey_complete") == True:
+            # if survey has been filled before in this session, skip asking survey again
             return []
         else:
-            return [FollowupAction("survey_form"), SlotSet("number", None)]
+            # start survey and set number slot to None in case it was filled before
+            return [FollowupAction("survey_form")]
 
 
 class SurveySubmit(Action):
@@ -82,7 +76,7 @@ class SurveySubmit(Action):
 
         dispatcher.utter_message(template="utter_open_feedback")
         dispatcher.utter_message(template="utter_survey_end")
-        return [SlotSet("survey_complete", True), SlotSet("number", None)]
+        return [SlotSet("survey_complete", True)]
 
 
 class OrderStatus(Action):
@@ -97,27 +91,28 @@ class OrderStatus(Action):
     ) -> List[Dict[Text, Any]]:
 
         # connect to DB
-        conn = sqlite3.connect("example.db")
-        c = conn.cursor()
+        connection = sqlite3.connect("example.db")
+        cursor = connection.cursor()
 
         # get email slot
         order_email = (tracker.get_slot("email"),)
 
         # retrieve row based on email
-        c.execute("SELECT * FROM orders WHERE order_email=?", order_email)
-        rw = c.fetchone()
+        cursor.execute("SELECT * FROM orders WHERE order_email=?", order_email)
+        data_row = cursor.fetchone()
 
-        if rw:
-            rw_lst = list(rw)
+        if data_row:
+            # convert tuple to list
+            data_list = list(data_row)
 
             # respond with order status
-            dispatcher.utter_message(template="utter_order_status", status=rw_lst[5])
-            conn.close()
+            dispatcher.utter_message(template="utter_order_status", status=data_list[5])
+            connection.close()
             return []
         else:
             # db didn't have an entry with this email
             dispatcher.utter_message(template="utter_no_order")
-            conn.close()
+            connection.close()
             return []
 
 
@@ -133,22 +128,22 @@ class CancelOrder(Action):
     ) -> List[Dict[Text, Any]]:
 
         # connect to DB
-        conn = sqlite3.connect("example.db")
-        c = conn.cursor()
+        connection = sqlite3.connect("example.db")
+        cursor = connection.cursor()
 
         # get email slot
         order_email = (tracker.get_slot("email"),)
 
         # retrieve row based on email
-        c.execute("SELECT * FROM orders WHERE order_email=?", order_email)
-        rw = c.fetchone()
+        cursor.execute("SELECT * FROM orders WHERE order_email=?", order_email)
+        data_row = cursor.fetchone()
 
-        if rw:
+        if data_row:
             # change status of entry
             status = [("cancelled"), (tracker.get_slot("email"))]
-            c.execute("UPDATE orders SET status=? WHERE order_email=?", status)
-            conn.commit()
-            conn.close()
+            cursor.execute("UPDATE orders SET status=? WHERE order_email=?", status)
+            connection.commit()
+            connection.close()
 
             # confirm cancellation
             dispatcher.utter_message(template="utter_order_cancel_finish")
@@ -156,7 +151,7 @@ class CancelOrder(Action):
         else:
             # db didn't have an entry with this email
             dispatcher.utter_message(template="utter_no_order")
-            conn.close()
+            connection.close()
             return []
 
 
@@ -172,22 +167,22 @@ class ReturnOrder(Action):
     ) -> List[Dict[Text, Any]]:
 
         # connect to DB
-        conn = sqlite3.connect("example.db")
-        c = conn.cursor()
+        connection = sqlite3.connect("example.db")
+        cursor = connection.cursor()
 
         # get email slot
         order_email = (tracker.get_slot("email"),)
 
         # retrieve row based on email
-        c.execute("SELECT * FROM orders WHERE order_email=?", order_email)
-        rw = c.fetchone()
+        cursor.execute("SELECT * FROM orders WHERE order_email=?", order_email)
+        data_row = cursor.fetchone()
 
-        if rw:
+        if data_row:
             # change status of entry
             status = [("returning"), (tracker.get_slot("email"))]
-            c.execute("UPDATE orders SET status=? WHERE order_email=?", status)
-            conn.commit()
-            conn.close()
+            cursor.execute("UPDATE orders SET status=? WHERE order_email=?", status)
+            connection.commit()
+            connection.close()
 
             # confirm return
             dispatcher.utter_message(template="utter_return_finish")
@@ -195,5 +190,5 @@ class ReturnOrder(Action):
         else:
             # db didn't have an entry with this email
             dispatcher.utter_message(template="utter_no_order")
-            conn.close()
+            connection.close()
             return []
