@@ -155,7 +155,6 @@ responses:
   - text: Sorry, seems like we don't have those shoes.
 actions:
 - action_product_search
-- action_survey_start
 - action_survey_submit
 - action_order_status
 - action_cancel_order

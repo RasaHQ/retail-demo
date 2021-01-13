@@ -43,26 +43,6 @@ class ActionProductSearch(Action):
             slots_to_reset = ["size", "color"]
             return [SlotSet(slot, None) for slot in slots_to_reset]
 
-
-class SurveyStart(Action):
-    def name(self) -> Text:
-        return "action_survey_start"
-
-    async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-
-        if tracker.get_slot("survey_complete") == True:
-            # if survey has been filled before in this session, skip asking survey again
-            return []
-        else:
-            # start survey and set number slot to None in case it was filled before
-            return [FollowupAction("survey_form")]
-
-
 class SurveySubmit(Action):
     def name(self) -> Text:
         return "action_survey_submit"

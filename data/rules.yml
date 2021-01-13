@@ -26,14 +26,25 @@ rules:
   - action: order_status_form
   - active_loop: order_status_form
 
-- rule: Submit order status form
+- rule: Submit order status form, survey complete
+  condition:
+  - active_loop: order_status_form
+  - slot_was_set:
+    - survey_complete: True
+  steps:
+  - action: order_status_form
+  - active_loop: null
+  - action: action_order_status
+
+- rule: Submit order status form, needs survey
   condition:
   - active_loop: order_status_form
   steps:
   - action: order_status_form
   - active_loop: null
   - action: action_order_status
-  - action: action_survey_start
+  - action: survey_form
+  - active_loop: survey_form
 
 # cancel order
 
@@ -45,14 +56,25 @@ rules:
   - action: cancel_form
   - active_loop: cancel_form
 
-- rule: Submit cancel form
+- rule: Submit cancel form, survey complete
+  condition:
+  - active_loop: cancel_form
+  - slot_was_set:
+    - survey_complete: True
+  steps:
+  - action: cancel_form
+  - active_loop: null
+  - action: action_cancel_order
+
+- rule: Submit cancel form, needs survey
   condition:
   - active_loop: cancel_form
   steps:
   - action: cancel_form
   - active_loop: null
   - action: action_cancel_order
-  - action: action_survey_start
+  - action: survey_form
+  - active_loop: survey_form
 
 # return
 
@@ -64,14 +86,25 @@ rules:
   - action: return_form
   - active_loop: return_form
 
-- rule: Submit return form
+- rule: Submit return form, survey complete
+  condition:
+  - active_loop: return_form
+  - slot_was_set:
+    - survey_complete: True
+  steps:
+  - action: return_form
+  - active_loop: null
+  - action: action_return
+
+- rule: Submit return form, needs survey
   condition:
   - active_loop: return_form
   steps:
   - action: return_form
   - active_loop: null
   - action: action_return
-  - action: action_survey_start
+  - action: survey_form
+  - active_loop: survey_form
 
 # product updates
 
@@ -83,14 +116,25 @@ rules:
   - action: product_updates_form
   - active_loop: product_updates_form
 
-- rule: Submit updates form
+- rule: Submit updates form, survey complete
+  condition:
+  - active_loop: product_updates_form
+  - slot_was_set:
+    - survey_complete: True
+  steps:
+  - action: product_updates_form
+  - active_loop: null
+  - action: utter_product_updates_finish
+
+- rule: Submit updates form, needs survey
   condition:
   - active_loop: product_updates_form
   steps:
   - action: product_updates_form
   - active_loop: null
   - action: utter_product_updates_finish
-  - action: action_survey_start
+  - action: survey_form
+  - active_loop: survey_form
 
 # product search
 
@@ -103,14 +147,25 @@ rules:
   - action: product_stock_form
   - active_loop: product_stock_form
 
-- rule: Submit product stock form
+- rule: Submit product stock form, survey complete
+  condition:
+  - active_loop: product_stock_form
+  - slot_was_set:
+    - survey_complete: True
+  steps:
+  - action: product_stock_form
+  - active_loop: null
+  - action: action_product_search
+
+- rule: Submit product stock form, needs survey
   condition:
   - active_loop: product_stock_form
   steps:
   - action: product_stock_form
   - active_loop: null
   - action: action_product_search
-  - action: action_survey_start
+  - action: survey_form
+  - active_loop: survey_form
 
 # submit survey (activation is appended to each form)
 
