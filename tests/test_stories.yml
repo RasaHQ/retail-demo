@@ -1,186 +1,27 @@
 version: "2.0"
 stories:
-# - story: order status
-#   steps:
-#   - intent: greet
-#     user: |-
-#       hi
-#   - action: utter_greet
-#   - intent: order_status
-#     user: |
-#       I'd like an update on my order
-#   - action: order_status_form
-#   - active_loop: order_status_form
-#   - intent: inform
-#     user: |
-#       it's example@rasa.com
-#   - action: order_status_form
-#   - active_loop: null
-#   - action: utter_order_status
-- story: Story from Conversation ID 94f17fd4ef2e4ae7924df97a104d4a5f
+- story: faq
   steps:
-  - intent: order_status
-    user: |-
-      hi order status pls?
-  - action: order_status_form
-  - active_loop: order_status_form
-  - slot_was_set:
-    - requested_slot: email
-  - intent: deny
-    user: |-
-      nvermind
-  - action: utter_greet
-  - intent: faq/sizing_clarification
-    user: |-
-      american or european
-  - action: utter_faq
-  - action: order_status_form
-  - slot_was_set:
-    - requested_slot: email
-  - intent: chitchat/bot_challenge
-    user: |-
-      are you a bot?
-  - action: utter_chitchat
-  - action: order_status_form
-  - slot_was_set:
-    - requested_slot: email
-  - intent: deny
-    user: |-
-      nevermind
-  - action: utter_greet
-  - intent: greet
+  - intent: greet 
     user: |-
       hi
   - action: utter_greet
-  - intent: chitchat/mood_unhappy
+  - intent: faq
+    user: |
+      what kind of payment you take?
+  - action: utter_faq
+
+- story: order status switch to return
+  steps:
+  - intent: order_status
     user: |-
-      i'm mad
-  - action: utter_chitchat
+      can you help me get the status of my order?
+  - action: action_deactivate_loop
   - action: order_status_form
-  - slot_was_set:
-    - requested_slot: email
-# - story: cancel order
-#   steps:
-#   - intent: order_cancel
-#     user: |
-#       I need to cancel my order
-#   - action: cancel_form
-#   - active_loop: cancel_form
-#   - intent: inform
-#     user: |
-#       it's example@rasa.com
-#   - action: cancel_form
-#   - active_loop: null
-#   - action: utter_order_cancel_finish
-# - story: return item
-#   steps:
-#   - intent: return
-#     user: |
-#       return some shoes
-#   - action: return_form
-#   - active_loop: return_form
-#   - intent: inform
-#     user: |
-#       it's example@rasa.com
-#   - action: return_form
-#   - active_loop: null
-#   - action: utter_return_finish
-# - story: product updates
-#   steps:
-#   - intent: product_updates
-#     user: |
-#       subscribe to product updates
-#   - action: product_updates_form
-#   - active_loop: product_updates_form
-#   - intent: inform
-#     user: |
-#       it's example@rasa.com
-#   - action: product_updates_form
-#   - active_loop: null
-#   - action: utter_product_updates_finish
-# - story: Story from Conversation ID 9e646db44d5f4fa485876c2012a635a1
-#   steps:
-#   - intent: product_stock
-#   - action: utter_product_stock_start
-#   - action: product_stock_form
-#   - active_loop: product_stock_form
-#   - slot_was_set:
-#     - requested_slot: number
-#   - intent: faq
-#   - action: utter_faq
-#   - action: product_stock_form
-#   - slot_was_set:
-#     - requested_slot: number
-#   - intent: inform
-#     entities:
-#     - number: 9
-#   - slot_was_set:
-#     - number: 9
-#   - action: product_stock_form
-#   - slot_was_set:
-#     - number: 9
-#   - slot_was_set:
-#     - requested_slot: color
-#   - intent: inform
-#     entities:
-#     - color: blue
-#   - slot_was_set:
-#     - color: blue
-#   - action: product_stock_form
-#   - slot_was_set:
-#     - color: blue
-#   - slot_was_set:
-#     - requested_slot: null
-#   - active_loop: null
-#   - action: action_product_search
-# - story: Story from Conversation ID 827f58b86db24697a412d5318061f609
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: order_status
-#   - action: order_status_form
-#   - active_loop: order_status_form
-#   - slot_was_set:
-#     - requested_slot: email
-#   - intent: inform
-#     entities:
-#     - email: xyz@hulaloo.ai
-#   - slot_was_set:
-#     - email: xyz@hulaloo.ai
-#   - action: order_status_form
-#   - slot_was_set:
-#     - email: xyz@hulaloo.ai
-#   - slot_was_set:
-#     - requested_slot: null
-#   - active_loop: null
-#   - action: utter_order_status
-#   - intent: chitchat
-#   - action: utter_chitchat
-#   - intent: out_of_scope
-#   - action: utter_ask_rephrase
-# - story: Story from Conversation ID 3fc427a10be74c9eaa65324f66d36341
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: order_status
-#   - action: order_status_form
-#   - active_loop: order_status_form
-#   - slot_was_set:
-#     - requested_slot: email
-#   - intent: deny
-#   - action: utter_greet
-# - story: Story from Conversation ID c210fd5b47c04ea69fa5561d3b48da6b
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: return
-#   - action: return_form
-#   - active_loop: return_form
-#   - slot_was_set:
-#     - requested_slot: email
-#   - intent: product_stock
-#   - action: utter_product_stock_start
-#   - action: product_stock_form
-#   - active_loop: product_stock_form
-#   - slot_was_set:
-#     - requested_slot: number
+  - active_loop: order_status_form
+  - intent: return
+    user: |-
+      actually I want to start a return
+  - action: action_deactivate_loop
+  - action: return_form
+  - active_loop: return_form
