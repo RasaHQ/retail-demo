@@ -5,6 +5,11 @@ stories:
   - intent: greet
   - action: utter_greet
 
+- story: order shoes
+  steps:
+  - intent: order_shoes
+  - action: utter_order_shoes
+
 # cancel stories
 
 - story: User stops product_stock

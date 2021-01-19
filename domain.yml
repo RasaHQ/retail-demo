@@ -10,6 +10,7 @@ intents:
 - affirm
 - deny
 - inform
+- order_shoes
 - greet
 - chitchat
 - faq
@@ -153,6 +154,10 @@ responses:
   - text: You're in luck! We have those in stock.
   utter_no_stock:
   - text: Sorry, seems like we don't have those shoes.
+  utter_order_shoes:
+  - text: Sorry, I can't actually help you order the shoes. Please visit our 
+      site to buy some nice shoes! I can help you check inventory, see the 
+      status of an order or even make a change to that order.
 actions:
 - action_product_search
 - action_survey_submit

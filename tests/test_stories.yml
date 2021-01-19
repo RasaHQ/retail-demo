@@ -23,5 +23,141 @@ stories:
     user: |-
       actually I want to start a return
   - action: action_deactivate_loop
+  - active_loop: null
   - action: return_form
   - active_loop: return_form
+
+- story: order status happy path + survey
+  steps:
+  - intent: order_status
+    user: |-
+      can you help me get the status of my order?
+  - action: action_deactivate_loop
+  - action: order_status_form
+  - active_loop: order_status_form
+  - intent: inform
+    user: |-
+      it's [example@rasa.com](email)
+  - slot_was_set:
+    - email: example@rasa.com
+  - action: order_status_form
+  - active_loop: null
+  - action: action_order_status
+  - action: survey_form
+  - active_loop: survey_form
+  - intent: inform
+    user: |-
+      [5](number)
+  - slot_was_set:
+    - rating: 5
+  - action: survey_form
+  - active_loop: survey_form
+  - intent: chitchat
+    user: |-
+      it was great
+  - slot_was_set:
+    - open_feedback: "it was great"
+  - action: survey_form
+  - active_loop: null
+  - action: action_survey_submit
+
+- story: cancel order happy path
+  steps:
+  - intent: order_cancel
+    user: |-
+      i need to cancel
+  - action: action_deactivate_loop
+  - action: cancel_form
+  - active_loop: cancel_form
+  - intent: inform
+    user: |-
+      it's [example@rasa.com](email)
+  - slot_was_set:
+    - email: example@rasa.com
+  - action: cancel_form
+  - active_loop: null
+  - action: action_cancel_order
+  - action: survey_form
+  - active_loop: survey_form
+
+- story: return happy path
+  steps:
+  - intent: return
+    user: |-
+      return my shoes
+  - action: action_deactivate_loop
+  - action: return_form
+  - active_loop: return_form
+  - intent: inform
+    user: |-
+      it's [example@rasa.com](email)
+  - slot_was_set:
+    - email: example@rasa.com
+  - action: return_form
+  - active_loop: null
+  - action: action_return
+  - action: survey_form
+  - active_loop: survey_form
+
+- story: product updates happy path
+  steps:
+  - intent: product_updates
+    user: |-
+      I'd like to get updates on new products
+  - action: action_deactivate_loop
+  - action: product_updates_form
+  - active_loop: product_updates_form
+  - intent: inform
+    user: |-
+      it's [example@rasa.com](email)
+  - slot_was_set:
+    - email: example@rasa.com
+  - action: product_updates_form
+  - active_loop: null
+  - action: utter_product_updates_finish
+  - action: survey_form
+  - active_loop: survey_form
+
+- story: product search happy path
+  steps:
+  - intent: product_stock
+    user: |-
+      can you check inventory
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: utter_product_stock_start
+  - action: product_stock_form
+  - active_loop: product_stock_form
+  - intent: inform
+    user: |-
+      [9](number)
+  - slot_was_set:
+    - size: 9
+  - action: product_stock_form
+  - active_loop: product_stock_form
+  - intent: inform
+    user: |-
+      [blue](color)
+  - slot_was_set:
+    - color: blue
+  - action: product_stock_form
+  - active_loop: null
+  - action: action_product_search
+  - action: survey_form
+  - active_loop: survey_form
+
+- story: cancel out of order status
+  steps:
+  - intent: order_status
+    user: |-
+      get order status pls
+  - action: action_deactivate_loop
+  - action: order_status_form
+  - active_loop: order_status_form
+  - intent: deny
+    user: |-
+      nevermind
+  - action: utter_start_over
+  - action: utter_greet
+  - action: action_deactivate_loop
+  - active_loop: null

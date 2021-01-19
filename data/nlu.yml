@@ -66,6 +66,11 @@ nlu:
     - asdf@asdf.com
     - [Grey](color)
     - test@test.com
+- intent: order_shoes
+  examples: |
+    - i want to buy shoes
+    - no, don't want to do a return, want to purchase new shoes
+    - since they're in stock, how about I place an order
 - intent: affirm
   examples: |
     - yes
@@ -176,7 +181,6 @@ nlu:
     - am I talking to a human?
 - intent: chitchat/goodbye
   examples: |
-    - good afternoon
     - cu
     - good by
     - cee you later
