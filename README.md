@@ -1,6 +1,6 @@
 # Retail Example Bot
 
-This is a sample retail bot to help provide starter content, examples of how to implement particular features, and sample use cases.  
+This is a sample retail bot to help provide starter content, examples of how to implement particular features, and sample use cases. Built using Rasa 2.1.2
 
 ## Install dependencies
 
