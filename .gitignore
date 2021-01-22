@@ -110,7 +110,13 @@ venv.bak/
 
 # Rasa stuff
 models/
-*.db*
+events.db*
+rasa.db
 *.dot
 terms/
 results/
+data/nlg_nlu.yml
+rasa-x-details
+
+# scripts
+read_db.py

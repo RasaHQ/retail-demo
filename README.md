@@ -65,6 +65,22 @@ For the purposes of illustration, the bot has orders for the following email add
 - `me@rasa.com`
 - `me@gmail.com`
 
+And these are the shoes that should show as in stock (size, color):
+
+```
+inventory = [(7, 'blue'),
+             (8, 'blue'),
+             (9, 'blue'),
+             (10, 'blue'),
+             (11, 'blue'),
+             (12, 'blue'),
+             (7, 'black'),
+             (8, 'black'),
+             (9, 'black'),
+             (10, 'black')
+            ]
+```
+
 ## Testing the bot
 
 You can test the bot on test conversations by running  `rasa test`.
