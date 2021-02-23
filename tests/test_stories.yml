@@ -161,3 +161,19 @@ stories:
   - action: utter_greet
   - action: action_deactivate_loop
   - active_loop: null
+
+- story: product updates negation
+  steps:
+  - intent: product_updates
+    user: |-
+      I'd like to get updates on new products
+  - action: action_deactivate_loop
+  - action: product_updates_form
+  - active_loop: product_updates_form
+  - intent: product_updates
+    user: |-
+      uh I [don't](negation) want to subscribe anymore
+  - action: utter_start_over
+  - action: utter_greet
+  - action: action_deactivate_loop
+  - active_loop: null

@@ -47,6 +47,8 @@ nlu:
     - I'd like to sign up for updates
     - Subscribe to product updates
     - subscribe to updates
+    - i [don't](negation) want to subscribe
+    - I [do not](negation) subscribe
 - intent: inform
   examples: |
     - example@rasa.com

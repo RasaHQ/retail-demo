@@ -136,6 +136,18 @@ rules:
   - action: survey_form
   - active_loop: survey_form
 
+- rule: user uses negation to cancel out of product updates
+  condition:
+  - active_loop: product_updates_form
+  steps:
+  - intent: product_updates
+  - entities:
+    - negation
+  - action: utter_start_over
+  - action: utter_greet
+  - action: action_deactivate_loop
+  - active_loop: null
+
 # product search
 
 - rule: Activate form for product stock search

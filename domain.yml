@@ -20,6 +20,7 @@ entities:
 - email
 - color
 - number
+- negation
 slots:
   color:
     type: text
