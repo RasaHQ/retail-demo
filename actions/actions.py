@@ -5,6 +5,7 @@ from rasa_sdk.events import SlotSet
 from rasa_sdk.events import FollowupAction
 import sqlite3
 
+# change this to the location of your SQLite file
 path_to_db = "actions/example.db"
 
 class ActionProductSearch(Action):
