@@ -5,6 +5,7 @@ from rasa_sdk.events import SlotSet
 from rasa_sdk.events import FollowupAction
 import sqlite3
 
+path_to_db = "actions/example.db"
 
 class ActionProductSearch(Action):
     def name(self) -> Text:
@@ -18,7 +19,7 @@ class ActionProductSearch(Action):
     ) -> List[Dict[Text, Any]]:
 
         # connect to DB
-        connection = sqlite3.connect("example.db")
+        connection = sqlite3.connect(path_to_db)
         cursor = connection.cursor()
 
         # get slots and save as tuple
@@ -71,7 +72,7 @@ class OrderStatus(Action):
     ) -> List[Dict[Text, Any]]:
 
         # connect to DB
-        connection = sqlite3.connect("example.db")
+        connection = sqlite3.connect(path_to_db)
         cursor = connection.cursor()
 
         # get email slot
@@ -108,7 +109,7 @@ class CancelOrder(Action):
     ) -> List[Dict[Text, Any]]:
 
         # connect to DB
-        connection = sqlite3.connect("example.db")
+        connection = sqlite3.connect(path_to_db)
         cursor = connection.cursor()
 
         # get email slot
@@ -147,7 +148,7 @@ class ReturnOrder(Action):
     ) -> List[Dict[Text, Any]]:
 
         # connect to DB
-        connection = sqlite3.connect("example.db")
+        connection = sqlite3.connect(path_to_db)
         cursor = connection.cursor()
 
         # get email slot
