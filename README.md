@@ -38,7 +38,7 @@ under the hood. To simply talk to the bot, you can remove this flag.
 
 `data/nlu.yml` - contains NLU training data
 
-`actions.py` - contains custom action/api code
+`actions/actions.py` - contains custom action/api code
 
 `domain.yml` - the domain file, including bot response templates
 
