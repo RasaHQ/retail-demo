@@ -34,9 +34,9 @@ under the hood. To simply talk to the bot, you can remove this flag.
 
 ## Overview of the files
 
-`data/core.md` - contains stories
+`data/stories.yml` - contains stories
 
-`data/nlu.md` - contains NLU training data
+`data/nlu.yml` - contains NLU training data
 
 `actions.py` - contains custom action/api code
 
