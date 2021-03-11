@@ -3,6 +3,7 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 from rasa_sdk.events import FollowupAction
+from rasa_sdk.events import BotUttered
 import sqlite3
 
 # change this to the location of your SQLite file
@@ -174,3 +175,23 @@ class ReturnOrder(Action):
             dispatcher.utter_message(template="utter_no_order")
             connection.close()
             return []
+
+class GiveName(Action):
+    def name(self) -> Text:
+        return "action_give_name"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+
+        evt = BotUttered(
+            text = "my name is bot? idk", 
+            metadata = {
+                "nameGiven": "bot"
+            }
+        )
+
+        return [evt]

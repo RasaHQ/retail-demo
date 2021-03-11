@@ -214,3 +214,7 @@ nlu:
     - what is the weather
     - why is the sky blue
     - blah blah blah
+- intent: whats_your_name
+  examples: |
+    - can you tell me your name?
+    - what's your name?
