@@ -16,6 +16,7 @@ intents:
 - faq
 - out_of_scope
 - nlu_fallback
+- whats_your_name
 entities:
 - email
 - color
@@ -165,6 +166,7 @@ actions:
 - action_order_status
 - action_cancel_order
 - action_return
+- action_give_name
 forms:
   order_status_form:
     email:

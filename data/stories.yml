@@ -57,3 +57,8 @@ stories:
   - action: action_deactivate_loop
   - active_loop: null
 
+# this is to demonstrate adding metadata to a response
+- story: user asks for name
+  steps:
+  - intent: whats_your_name
+  - action: action_give_name
