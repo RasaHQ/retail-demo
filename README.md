@@ -37,6 +37,8 @@ under the hood. To simply talk to the bot, you can remove this flag.
 `data/stories.yml` - contains stories
 
 `data/nlu.yml` - contains NLU training data
+
+
 `data/rules.yml` - contains the rules upon which the bot respond to queries
 
 `actions/actions.py` - contains custom action/api code
