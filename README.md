@@ -34,11 +34,14 @@ under the hood. To simply talk to the bot, you can remove this flag.
 
 ## Overview of the files
 
-`data/core.md` - contains stories
+`data/stories.yml` - contains stories
 
-`data/nlu.md` - contains NLU training data
+`data/nlu.yml` - contains NLU training data
 
-`actions.py` - contains custom action/api code
+
+`data/rules.yml` - contains the rules upon which the bot responds to queries
+
+`actions/actions.py` - contains custom action/api code
 
 `domain.yml` - the domain file, including bot response templates
 
