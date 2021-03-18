@@ -39,7 +39,7 @@ under the hood. To simply talk to the bot, you can remove this flag.
 `data/nlu.yml` - contains NLU training data
 
 
-`data/rules.yml` - contains the rules upon which the bot respond to queries
+`data/rules.yml` - contains the rules upon which the bot responds to queries
 
 `actions/actions.py` - contains custom action/api code
 
