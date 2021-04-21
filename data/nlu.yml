@@ -92,6 +92,7 @@ nlu:
     - not really
     - Nah, I would not like to be added to the list
     - nope
+    - u stink
 - intent: greet
   examples: |
     - hey
