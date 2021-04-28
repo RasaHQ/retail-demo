@@ -141,8 +141,8 @@ rules:
   - active_loop: product_updates_form
   steps:
   - intent: product_updates
-  - entities:
-    - negation
+    entities:
+    - negation: value
   - action: utter_start_over
   - action: utter_greet
   - action: action_deactivate_loop
