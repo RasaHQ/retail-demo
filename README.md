@@ -104,3 +104,9 @@ You will need to have docker installed in order to build the action server image
 the [public image on Dockerhub](https://hub.docker.com/repository/docker/cdesmar/retail-demo) instead of building it yourself.
 
 It is recommended to use an [automated CI/CD process](https://rasa.com/docs/rasa/user-guide/setting-up-ci-cd) to keep your action server up to date in a production environment.
+
+
+## :gift: License
+Licensed under the GNU General Public License v3. Copyright 2018 Rasa Technologies
+GmbH. [Copy of the license](https://github.com/RasaHQ/retail-demo/blob/main/LICENSE).
+Licensees may convey the work under this license. There is no warranty for the work.
