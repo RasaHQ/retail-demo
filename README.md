@@ -107,6 +107,6 @@ It is recommended to use an [automated CI/CD process](https://rasa.com/docs/rasa
 
 
 ## :gift: License
-Licensed under the GNU General Public License v3. Copyright 2018 Rasa Technologies
+Licensed under the GNU General Public License v3. Copyright 2021 Rasa Technologies
 GmbH. [Copy of the license](https://github.com/RasaHQ/retail-demo/blob/main/LICENSE).
 Licensees may convey the work under this license. There is no warranty for the work.
