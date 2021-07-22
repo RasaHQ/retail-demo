@@ -41,7 +41,7 @@ slots:
     type: text
     influence_conversation: false
   requested_slot:
-    type: unfeaturized
+    type: any
     influence_conversation: false
   verified_email:
     type: bool
@@ -169,35 +169,41 @@ actions:
 - action_give_name
 forms:
   order_status_form:
-    email:
-    - entity: email
-      type: from_entity
-    - intent:
-      - inform
-      type: from_text
+    required_slots:
+      email:
+      - entity: email
+        type: from_entity
+      - intent:
+        - inform
+        type: from_text
   cancel_form:
-    email:
-    - entity: email
-      type: from_entity
+    required_slots:
+      email:
+      - entity: email
+        type: from_entity
   return_form:
-    email:
-    - entity: email
-      not_intent: product_updates
-      type: from_entity
+    required_slots:
+      email:
+      - entity: email
+        not_intent: product_updates
+        type: from_entity
   product_updates_form:
-    email:
-    - entity: email
-      type: from_entity
+    required_slots:
+      email:
+      - entity: email
+        type: from_entity
   product_stock_form:
-    size:
-    - entity: number
-      type: from_entity
-    color:
-    - entity: color
-      type: from_entity
+    required_slots:
+      size:
+      - entity: number
+        type: from_entity
+      color:
+      - entity: color
+        type: from_entity
   survey_form:
-    rating:
-    - entity: number
-      type: from_entity
-    open_feedback:
-    - type: from_text
+    required_slots:
+      rating:
+      - entity: number
+        type: from_entity
+      open_feedback:
+      - type: from_text
