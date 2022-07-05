@@ -27,7 +27,7 @@ pipeline:
   - name: FallbackClassifier
     threshold: 0.3
     ambiguity_threshold: 0.1
-  - name: "DucklingHTTPExtractor"
+  - name: "DucklingEntityExtractor"
     # url of the running duckling server
     url: "http://localhost:8000"
     # dimensions to extract
