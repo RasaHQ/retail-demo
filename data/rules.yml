@@ -46,6 +46,36 @@ rules:
   - action: survey_form
   - active_loop: survey_form
 
+# make order
+
+- rule: Activate email form for order create
+  steps:
+  - intent: order_shoes
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: create_order_form
+  - active_loop: create_order_form
+
+- rule: Submit create order form, survey complete
+  condition:
+  - active_loop: create_order_form
+  - slot_was_set:
+    - survey_complete: True
+  steps:
+  - action: create_order_form
+  - active_loop: null
+  - action: action_create_order
+
+- rule: Submit create order form, needs survey
+  condition:
+  - active_loop: create_order_form
+  steps:
+  - action: create_order_form
+  - active_loop: null
+  - action: action_create_order
+  - action: survey_form
+  - active_loop: survey_form
+
 # cancel order
 
 - rule: Activate email form for cancelling order

@@ -31,6 +31,7 @@ slots:
       type: from_entity
       conditions:
       - active_loop: product_stock_form
+      - active_loop: create_order_form
     - type: from_entity
       entity: color
   email:
@@ -44,6 +45,7 @@ slots:
         requested_slot: email
       - active_loop: cancel_form
       - active_loop: product_updates_form
+      - active_loop: create_order_form
     - intent:
       - inform
       type: from_text
@@ -65,6 +67,7 @@ slots:
       type: from_entity
       conditions:
       - active_loop: product_stock_form
+      - active_loop: create_order_form
   rating:
     type: text
     influence_conversation: false
@@ -114,12 +117,22 @@ responses:
   - text: beep, boop, don't understand
   utter_ask_order_status_form_email:
   - text: I can help you find the status of your order. What's your email address so I can find the order?
+  utter_ask_create_order_form_email:
+  - text: I can help you create order. What's your email address?
+  utter_ask_create_order_form_size:
+  - text: What's your size?
+  utter_ask_create_order_form_color:
+  - text: What color do you want?
   utter_order_status:
   - text: Based on the latest order from {email}, it looks like your order is currently {status}.
   utter_ask_cancel_form_email:
   - text: Sorry to hear you want to cancel! To help find your order, can you please provide your email address?
   utter_order_cancel_finish:
   - text: Ok, I've cancelled the order for {email}. If you'd like to reorder, please visit your recent orders in your account history.
+  utter_order_create_finish:
+  - text: Order successfully created!
+  utter_order_create_error:
+  - text: Sorry, an error occurred during order creation
   utter_ask_return_form_email:
   - text: Let's start that return. To help find your order, can you please provide your email address?
   utter_return_finish:
@@ -194,7 +207,7 @@ responses:
   utter_no_stock:
   - text: Sorry, seems like we don't have those shoes.
   utter_order_shoes:
-  - text: Sorry, I can't actually help you order the shoes. Please visit our site to buy some nice shoes! I can help you check inventory, see the status of an order or even make a change to that order.
+  - text: Of course you can order shoes!
 actions:
 - action_product_search
 - action_survey_submit
@@ -202,6 +215,7 @@ actions:
 - action_cancel_order
 - action_return
 - action_give_name
+- action_create_order
 forms:
   order_status_form:
     ignored_intents: []
@@ -229,3 +243,9 @@ forms:
     required_slots:
     - rating
     - open_feedback
+  create_order_form:
+    ignored_intents: []
+    required_slots:
+    - email
+    - size
+    - color
