@@ -82,7 +82,7 @@ class OrderStatus(Action):
         order_email = (tracker.get_slot("email"),)
 
         # retrieve row based on email
-        cursor.execute("SELECT * FROM orders join user on user.id = user WHERE email=?", order_email)
+        cursor.execute("SELECT name FROM orders join user on user.id = user join status ON status.id = status WHERE email=?", order_email)
         data_row = cursor.fetchone()
 
         if data_row:
@@ -90,7 +90,7 @@ class OrderStatus(Action):
             data_list = list(data_row)
 
             # respond with order status
-            dispatcher.utter_message(template="utter_order_status", status=data_list[5])
+            dispatcher.utter_message(template="utter_order_status", status=data_list[0])
             connection.close()
             return []
         else:
