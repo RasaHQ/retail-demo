@@ -74,7 +74,6 @@ pamqp==2.3.0
 partd==1.2.0
 pathspec==0.8.1
 Pillow==8.0.1
-pkg_resources==0.0.0
 prompt-toolkit==2.0.10
 protobuf==3.14.0
 psycopg2-binary==2.8.6

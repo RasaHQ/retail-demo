@@ -31,6 +31,7 @@ slots:
       type: from_entity
       conditions:
       - active_loop: product_stock_form
+      - active_loop: create_reservation_form
     - type: from_entity
       entity: color
   email:
@@ -65,6 +66,7 @@ slots:
       type: from_entity
       conditions:
       - active_loop: product_stock_form
+      - active_loop: create_reservation_form
   rating:
     type: text
     influence_conversation: false
@@ -107,6 +109,8 @@ responses:
       title: Check inventory
     - payload: Subscribe to product updates
       title: Subscribe to product updates
+    - payload: Reserve shoes
+      title: Reserve shoes
     text: Hi there! I'm a demo bot from Rasa to help you with ordering shoes. How can I help you?
   utter_default:
   - text: I don't think I understand. Can you try providing more detail?
@@ -116,6 +120,10 @@ responses:
   - text: I can help you find the status of your order. What's your email address so I can find the order?
   utter_order_status:
   - text: Based on the latest order from {email}, it looks like your order is currently {status}.
+  utter_ask_reservation_form_size:
+  - text: What's your size?
+  utter_ask_reservation_form_color:
+  - text: What color do you want?
   utter_ask_cancel_form_email:
   - text: Sorry to hear you want to cancel! To help find your order, can you please provide your email address?
   utter_order_cancel_finish:
@@ -124,6 +132,10 @@ responses:
   - text: Let's start that return. To help find your order, can you please provide your email address?
   utter_return_finish:
   - text: Ok, I've kicked off your return. You should be receiving a return label in your inbox. Please send it in the next 14 days!
+  utter_reservation_create_finish:
+  - text: Your shoe was reserved successfully!
+  utter_reservation_create_error:
+  - text: Sorry, an error occurred during reservation
   utter_ask_product_updates_form_email:
   - text: I can keep you up to date with our weekly email about product updates! If you'd like to be added to the list, please add your email address.
   utter_product_updates_finish:
@@ -202,6 +214,7 @@ actions:
 - action_cancel_order
 - action_return
 - action_give_name
+- action_reserve_shoe
 forms:
   order_status_form:
     ignored_intents: []
@@ -229,3 +242,8 @@ forms:
     required_slots:
     - rating
     - open_feedback
+  create_reservation_form:
+    ignored_intents: []
+    required_slots:
+    - size
+    - color

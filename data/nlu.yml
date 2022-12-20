@@ -14,6 +14,18 @@ nlu:
     - I want to check the status of my order
     - actually can I check the status of my order
     - order status for example@rasa.com
+- intent: reserve_shoes
+  examples: |
+    - i want to reserve shoe
+    - do you have any [black](color) shoes in stock?
+    - what about [white](color) shoes
+    - what's your inventory
+    - are you out of size 9 shoes
+    - reserve
+    - make a reservation
+    - do you have my special shoes in stock
+    - Reserve shoes
+    - i'm looking for new shoes
 - intent: order_cancel
   examples: |
     - i'd like to cancel my order
@@ -56,7 +68,7 @@ nlu:
     - it's example@gmail.com
     - [black](color) shoes
     - [white](color) ones
-    - I'm looking for [orange](color) shoes
+    - I'm looking for [orange](color) 
     - [brown](color)
     - [blue](color)
     - it's 123

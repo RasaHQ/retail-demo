@@ -5,10 +5,14 @@ stories:
   - intent: greet
   - action: utter_greet
 
-- story: order shoes
+- story: User stops reserve_shoes
   steps:
-  - intent: order_shoes
-  - action: utter_order_shoes
+  - active_loop: create_reservation_form
+  - intent: deny
+  - action: utter_start_over
+  - action: utter_greet
+  - action: action_deactivate_loop
+  - active_loop: null
 
 # cancel stories
 
