@@ -48,7 +48,7 @@ rules:
 
 # reserve shoe
 
-- rule: Activate email form for reservation create
+- rule: Activate form for reservation create
   steps:
   - intent: reserve_shoes
   - action: action_deactivate_loop
@@ -63,6 +63,7 @@ rules:
   - action: create_reservation_form
   - active_loop: null
   - action: action_reserve_shoe
+  - active_loop: create_reservation_form ### сомневаюсь
 
 # cancel order
 

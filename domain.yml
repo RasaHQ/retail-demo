@@ -121,9 +121,9 @@ responses:
   - text: I can help you find the status of your order. What's your email address so I can find the order?
   utter_order_status:
   - text: Based on the latest order from {email}, it looks like your order is currently {status}.
-  utter_ask_reservation_form_size:
-  - text: What's your size?
-  utter_ask_reservation_form_color:
+  utter_ask_create_reservation_form_size:
+  - text: What size do you want to reserve?
+  utter_ask_create_reservation_form_color:
   - text: What color do you want?
   utter_ask_cancel_form_email:
   - text: Sorry to hear you want to cancel! To help find your order, can you please provide your email address?
