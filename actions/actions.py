@@ -214,7 +214,7 @@ class ReserveShoe(Action):
                 cursor = connection.cursor()
 
                 # get slots and save as tuple
-                shoe = [(tracker.get_slot("color")), (tracker.get_slot("size")), (tracker.get_slot("count"))]
+                shoe = [(tracker.get_slot("color")), (tracker.get_slot("size"))]
 
                 # place cursor on correct row based on search criteria
                 cursor.execute("SELECT * FROM inventory WHERE color=? AND size=? AND count <> 0", shoe)
@@ -223,8 +223,8 @@ class ReserveShoe(Action):
                 data_row = cursor.fetchone()
 
                 if data_row:
-                    email = [(tracket.get_slot("email"))]
-                    cursor.execute("SELECT email FROM users WHERE status == 1", email)
+                    #email = [(tracket.get_slot("email"))]
+                    email = cursor.execute("SELECT email FROM users WHERE status == 1")
                     if email:
                         cursor.execute("INSERT into orders (order_date, order_number, email, color, size, status) values (?,?,?,?,?,?)", (str(datetime.now().date()), NULL, cursor.execute("SELECT email FROM users WHERE status == 1"), color, size, "reserved"))
                         cursor.execute("UPDATE inventory SET count=count-1 WHERE color=? AND size=?", (color, size))
@@ -240,4 +240,5 @@ class ReserveShoe(Action):
                     connection.close()
                     slots_to_reset = ["size", "color"]
                     return [SlotSet(slot, None) for slot in slots_to_reset]
-        
+            except Exception as e:
+                dispatcher.utter_message(template="utter_reservation_create_error")

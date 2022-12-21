@@ -59,8 +59,6 @@ rules:
 - rule: Submit create reservation form, survey complete
   condition:
   - active_loop: create_reservation_form
-  - slot_was_set:
-    - survey_complete: True
   steps:
   - action: create_reservation_form
   - active_loop: null

@@ -17,6 +17,7 @@ intents:
 - out_of_scope
 - nlu_fallback
 - whats_your_name
+- reserve_shoes
 entities:
 - email
 - color
