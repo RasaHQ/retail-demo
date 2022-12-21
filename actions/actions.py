@@ -209,22 +209,17 @@ class ReserveShoe(Action):
             domain: Dict[Text, Any],
         ) -> List[Dict[Text, Any]]:
             try:
-                # connect to DB
                 connection = sqlite3.connect(path_to_db)
                 cursor = connection.cursor()
-
-                # get slots and save as tuple
                 shoe = [(tracker.get_slot("color")), (tracker.get_slot("size"))]
-                # place cursor on correct row based on search criteria
                 cursor.execute("SELECT * FROM inventory WHERE color=? AND size=? AND count <> 0", shoe)
-                # retrieve sqlite row
                 data_row = cursor.fetchone()
                 if data_row:
-                    #email = [(tracket.get_slot("email"))]
                     cursor.execute("SELECT email FROM users WHERE status == 1")
                     email = cursor.fetchone()[0]
                     if email:
-                        cursor.execute("INSERT into orders (order_date, email, color, size, status) values (?,?,?,?,?)", (str(datetime.now().date()), email, data_row[1], data_row[0], "reserved"))
+                        cursor.execute("INSERT into orders (order_date, email, color, size, status) values (?,?,?,?,?)", 
+                                        (str(datetime.now().date()), email, data_row[1], data_row[0], "reserved"))
                         cursor.execute("UPDATE inventory SET count=count-1 WHERE color=? AND size=?", (data_row[1], data_row[0]))
                         connection.commit()
                         connection.close()

@@ -134,7 +134,7 @@ responses:
   utter_return_finish:
   - text: Ok, I've kicked off your return. You should be receiving a return label in your inbox. Please send it in the next 14 days!
   utter_reservation_create_finish:
-  - text: Your shoe was reserved successfully!
+  - text: Your {color} shoe, {size} size was reserved successfully!
   utter_reservation_create_error:
   - text: Sorry, an error occurred during reservation
   utter_ask_product_updates_form_email:

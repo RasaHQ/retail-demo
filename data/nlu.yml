@@ -66,6 +66,9 @@ nlu:
     - I'm looking for [orange](color) 
     - [brown](color)
     - [blue](color)
+    - [red](color)
+    - [green](color)
+    - [blue](color)
     - it's 123
     - it's a@b.com
     - xyz@hulaloo.ai

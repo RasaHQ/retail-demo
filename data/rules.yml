@@ -63,7 +63,7 @@ rules:
   - action: create_reservation_form
   - active_loop: null
   - action: action_reserve_shoe
-  - active_loop: create_reservation_form ### сомневаюсь
+  - active_loop: create_reservation_form
 
 # cancel order
 
