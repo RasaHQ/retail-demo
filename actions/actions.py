@@ -81,9 +81,11 @@ class OrderStatus(Action):
 
         # get email slot
         order_email = (tracker.get_slot("email"),)
-
+        if tracker.get_slot("email") == None:
+            dispatcher.utter_message(text="Войдите в аккаунт, чтобы проверить заказы.")
+            return []
         # retrieve row based on email
-        cursor.execute("SELECT * FROM orders WHERE order_email=?", order_email)
+        cursor.execute("SELECT * FROM orders WHERE email=? AND status!='in cart'", order_email)
         data_row = cursor.fetchone()
 
         if data_row:
@@ -99,6 +101,7 @@ class OrderStatus(Action):
             dispatcher.utter_message(template="utter_no_order")
             connection.close()
             return []
+
 
 
 class CancelOrder(Action):
@@ -215,8 +218,9 @@ class ReserveShoe(Action):
                 cursor.execute("SELECT * FROM inventory WHERE color=? AND size=? AND count <> 0", shoe)
                 data_row = cursor.fetchone()
                 if data_row:
-                    cursor.execute("SELECT email FROM users WHERE status == 1")
-                    email = cursor.fetchone()[0]
+                    #cursor.execute("SELECT email FROM users WHERE status == 1")
+                    #email = cursor.fetchone()[0]
+                    email = tracker.get_slot("email")
                     if email:
                         cursor.execute("INSERT into orders (order_date, email, color, size, status) values (?,?,?,?,?)", 
                                         (str(datetime.now().date()), email, data_row[1], data_row[0], "reserved"))
@@ -238,4 +242,119 @@ class ReserveShoe(Action):
                 slots_to_reset = ["size", "color"]
                 return [SlotSet(slot, None) for slot in slots_to_reset]
 
+class AddToCart(Action):
+    def name(self) -> Text:
+        return "action_add_to_cart"
 
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+
+        order_date = datetime.now().strftime('%Y-%m-%d')
+        color = str(tracker.get_slot("color"))
+        size = float(tracker.get_slot("size"))
+        status = "in_cart"
+        connection = sqlite3.connect(path_to_db)
+        cursor = connection.cursor()
+        shoe = [(color), (size)]
+        cursor.execute(
+            "SELECT * FROM inventory WHERE color=? AND size=? AND count <> 0", shoe)
+        data_row = cursor.fetchone()
+        if data_row:
+            #cursor.execute("SELECT email FROM users WHERE status == 1")
+            #email = cursor.fetchone()[0]
+            email = tracker.get_slot("email")
+            if email:
+                cursor.execute('INSERT INTO orders("order_date", "email", "color", "size", "status") VALUES (?,?,?,?,?)', (order_date, email, data_row[1], data_row[0], "in_cart"))
+                connection.commit()
+                connection.close()
+                slots_to_reset = ["size", "color"]
+                dispatcher.utter_message(template="utter_order_in_cart")
+                return [SlotSet(slot, None) for slot in slots_to_reset]
+        else:
+            dispatcher.utter_message(template="utter_not_in_cart")
+            connection.close()
+            slots_to_reset = ["size", "color"]
+            return [SlotSet(slot, None) for slot in slots_to_reset]
+
+class Registration(Action):
+    def name(self) -> Text:
+        return "action_registration"
+
+    def run(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        # connect to DB
+        connection = sqlite3.connect(path_to_db)
+        cursor = connection.cursor()
+
+        # get slots and save as tuple
+        reg_params = [(tracker.get_slot("email")), (tracker.get_slot("password"))]
+
+        # place cursor on correct row based on search criteria
+        cursor.execute("SELECT * FROM users WHERE email=?", [reg_params[0]])
+
+        # retrieve sqlite row
+        data_row = cursor.fetchone()
+
+        if data_row:
+            dispatcher.utter_message(text="Пользователь с таким email уже существует.")
+            connection.close()
+            #return [SlotSet("survey_complete", True)]
+        else:
+            # provide in stock message
+            cursor.execute("INSERT INTO users (email, password, status) VALUES (?, ?, 0);", reg_params)
+            connection.commit()
+            dispatcher.utter_message(text="Вы успешно зарегистрированы!")
+            connection.close()
+        slots_to_reset = ["email", "password"]
+        return [SlotSet(slot, None) for slot in slots_to_reset]
+
+class SignIn(Action):
+    def name(self) -> Text:
+        return "action_sign_in"
+
+    def run(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        # connect to DB
+        connection = sqlite3.connect(path_to_db)
+        cursor = connection.cursor()
+
+        # get slots and save as tuple
+        sign_in_params = [(tracker.get_slot("email")), (tracker.get_slot("password"))]
+
+        # place cursor on correct row based on search criteria
+        cursor.execute("SELECT * FROM users WHERE email=?", [sign_in_params[0]])
+
+        # retrieve sqlite row
+        data_row = cursor.fetchone()
+
+        if not data_row:
+            dispatcher.utter_message(text="Пользователя с таким email не существует:(")
+            connection.close()
+            slots_to_reset = ["email", "password"]
+            return [SlotSet(slot, None) for slot in slots_to_reset]
+        else:
+            # provide in stock message
+            cursor.execute("SELECT * FROM users WHERE email=? AND password=?", sign_in_params)
+
+            data_row = cursor.fetchone()
+            if data_row:
+                connection.close()
+                dispatcher.utter_message(text="Вы успешно вошли!")
+                return []
+            else:
+                connection.close()
+                dispatcher.utter_message(text="Неправильный email или пароль!")
+                slots_to_reset = ["email", "password"]
+                return [SlotSet(slot, None) for slot in slots_to_reset]

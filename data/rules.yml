@@ -18,33 +18,13 @@ rules:
 
 # order status
 
-- rule: Activate email form for order status
+- rule: Check order status
   steps:
   - intent: order_status
   - action: action_deactivate_loop
   - active_loop: null
-  - action: order_status_form
-  - active_loop: order_status_form
-
-- rule: Submit order status form, survey complete
-  condition:
-  - active_loop: order_status_form
-  - slot_was_set:
-    - survey_complete: True
-  steps:
-  - action: order_status_form
-  - active_loop: null
   - action: action_order_status
-
-- rule: Submit order status form, needs survey
-  condition:
-  - active_loop: order_status_form
-  steps:
-  - action: order_status_form
   - active_loop: null
-  - action: action_order_status
-  - action: survey_form
-  - active_loop: survey_form
 
 # reserve shoe
 
@@ -64,6 +44,61 @@ rules:
   - active_loop: null
   - action: action_reserve_shoe
   - active_loop: create_reservation_form
+
+# Registration
+- rule: Activate form for registration
+  steps:
+  - intent: registration
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: create_registration_form
+  - active_loop: create_registration_form
+
+- rule: Submit create registration form
+  condition:
+  - active_loop: create_registration_form
+  steps:
+  - action: create_registration_form
+  - active_loop: null
+  - action: action_registration
+  - active_loop: null
+
+# Sign in
+
+- rule: Activate form for sign in
+  steps:
+  - intent: sign_in
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: create_sign_in_form
+  - active_loop: create_sign_in_form
+
+- rule: Submit create sign in form
+  condition:
+  - active_loop: create_sign_in_form
+  steps:
+  - action: create_sign_in_form
+  - active_loop: null
+  - action: action_sign_in
+  - active_loop: null
+
+# add to cart
+- rule: Activate email form for adding order to cart
+  steps:
+  - intent: add_to_cart
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: add_to_cart_form
+  - active_loop: add_to_cart_form
+
+- rule: Submit adding to cart form, survey complete
+  condition:
+  - active_loop: add_to_cart_form
+  steps:
+  - action: add_to_cart_form
+  - active_loop: null
+  - action: action_add_to_cart
+  - active_loop: add_to_cart_form
 
 # cancel order
 

@@ -18,11 +18,15 @@ intents:
 - nlu_fallback
 - whats_your_name
 - reserve_shoes
+- add_to_cart
+- registration
+- sign_in
 entities:
 - email
 - color
 - number
 - negation
+- password
 slots:
   color:
     type: text
@@ -33,8 +37,20 @@ slots:
       conditions:
       - active_loop: product_stock_form
       - active_loop: create_reservation_form
+      - active_loop: add_to_cart_form
     - type: from_entity
       entity: color
+  password:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: password
+      type: from_entity
+      conditions:
+        - active_loop: create_registration_form
+        - active_loop: create_sign_in_form
+    - type: from_entity
+      entity: password
   email:
     type: text
     influence_conversation: false
@@ -46,6 +62,9 @@ slots:
         requested_slot: email
       - active_loop: cancel_form
       - active_loop: product_updates_form
+      - active_loop: create_registration_form
+      - active_loop: create_sign_in_form
+      - active_loop: add_to_cart_form
     - intent:
       - inform
       type: from_text
@@ -68,6 +87,7 @@ slots:
       conditions:
       - active_loop: product_stock_form
       - active_loop: create_reservation_form
+      - active_loop: add_to_cart_form
   rating:
     type: text
     influence_conversation: false
@@ -110,21 +130,39 @@ responses:
       title: Check inventory
     - payload: Subscribe to product updates
       title: Subscribe to product updates
+    - payload: Registration
+      title: Registration
+    - payload: Sign in
+      title: Sign in
     - payload: Reserve shoes
       title: Reserve shoes
+    - payload: Add to cart
+      title: Add shoes to cart
     text: Hi there! I'm a demo bot from Rasa to help you with ordering shoes. How can I help you?
   utter_default:
   - text: I don't think I understand. Can you try providing more detail?
   - text: um, what did you just say to me?
   - text: beep, boop, don't understand
-  utter_ask_order_status_form_email:
-  - text: I can help you find the status of your order. What's your email address so I can find the order?
+  #utter_ask_order_status_form_email:
+  #- text: I can help you find the status of your order. What's your email address so I can find the order?
   utter_order_status:
   - text: Based on the latest order from {email}, it looks like your order is currently {status}.
   utter_ask_create_reservation_form_size:
   - text: What size do you want to reserve?
   utter_ask_create_reservation_form_color:
   - text: What color do you want?
+  utter_registration_start:
+    - text: Let's register you! What are your email and password?
+  utter_ask_create_registration_form_password:
+  - text: and your password is..?
+  utter_ask_create_registration_form_email:
+  - text: Please, say me your email
+  utter_ask_create_sign_in_form_password:
+  - text: and your password is..?
+  utter_ask_create_sign_in_form_email:
+  - text: Please, say me your email
+  utter_sign_in_start:
+  - text: What are your email and password?
   utter_ask_cancel_form_email:
   - text: Sorry to hear you want to cancel! To help find your order, can you please provide your email address?
   utter_order_cancel_finish:
@@ -137,6 +175,16 @@ responses:
   - text: Your {color} shoe, {size} size was reserved successfully!
   utter_reservation_create_error:
   - text: Sorry, an error occurred during reservation
+  utter_order_in_cart:
+  - text: Your {color} shoe, {size} size is in cart!
+  utter_not_in_cart:
+  - text: Sorry, I can't put your order in cart.
+  utter_ask_add_to_cart_form_email:
+  - text: Let's start adding to cart. To help your with your order, can you please provide your email address?
+  utter_ask_add_to_cart_form_size:
+    - text: What size shoe would you like?
+  utter_ask_add_to_cart_form_color:
+    - text: What color are you looking for?
   utter_ask_product_updates_form_email:
   - text: I can keep you up to date with our weekly email about product updates! If you'd like to be added to the list, please add your email address.
   utter_product_updates_finish:
@@ -216,7 +264,20 @@ actions:
 - action_return
 - action_give_name
 - action_reserve_shoe
+- action_add_to_cart
+- action_registration
+- action_sign_in
 forms:
+  create_sign_in_form:
+    ignored_intents: [ ]
+    required_slots:
+    - email
+    - password
+  create_registration_form:
+    ignored_intents: [ ]
+    required_slots:
+    - email
+    - password
   order_status_form:
     ignored_intents: []
     required_slots:
@@ -248,3 +309,9 @@ forms:
     required_slots:
     - size
     - color
+  add_to_cart_form:
+    ignored_intents: [ ]
+    required_slots:
+      - email
+      - size
+      - color

@@ -83,6 +83,42 @@ nlu:
     - i want to buy shoes
     - no, don't want to do a return, want to purchase new shoes
     - since they're in stock, how about I place an order
+- intent: add_to_cart
+  examples: |
+    - can you add shoes to cart?
+    - add to cart 
+    - Add shoes to cart
+- intent: registration
+  examples: |
+    - register me with [asd@misis.ru](email) and [123456](password)
+    - sign up with [asd@misis.ru](email) and [123456](password)
+    - register me with [asd@misis.ru](email) and [121212](password)
+    - sign up with [asd@misis.ru](email) and [12dfd32](password)
+    - [asd@misis.ru](email)
+    - [asd@misis.ru](email)
+    - [123456](password))
+    - [1dfs23](password)
+    - [dfsfdf](password)
+    - [12_sfF](password)
+    - my password for registration is [123456](password)
+    - my password for registration is [1dfs23](password)
+    - my password for registration is [dfsfdf](password)
+    - my password for registration is [12_sfF](password)
+    - my password for registration is [dfsFFs](password)
+- intent: sign_in
+  examples: |
+    - I want to sign in with [asd@misis.ru](email) and [121212](password)
+    - sign in with [asd@misis.ru](email) and [12dfd32](password)
+    - sign in [asd@misis.ru](email) and [12165s](password)
+    - Sign in
+    - [12165s](password)
+    - [asd@misis.ru](email)
+    - my password for sign in is [123456](password)
+    - sign in password is [123456](password)
+    - sign in password is [1dfs23](password)
+    - sign in password is [dfsfdf](password)
+    - sign in password is [12_sfF](password)
+    - sign in password is [dfsFFs](password)
 - intent: affirm
   examples: |
     - yes

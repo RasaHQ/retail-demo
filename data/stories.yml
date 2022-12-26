@@ -5,6 +5,9 @@ stories:
   - intent: greet
   - action: utter_greet
 
+
+# cancel stories
+
 - story: User stops reserve_shoes
   steps:
   - active_loop: create_reservation_form
@@ -14,8 +17,15 @@ stories:
   - action: action_deactivate_loop
   - active_loop: null
 
-# cancel stories
-
+- story: User stops add_to_cart
+  steps:
+  - active_loop: add_to_cart_form
+  - intent: deny
+  - action: utter_start_over
+  - action: utter_greet
+  - action: action_deactivate_loop
+  - active_loop: null
+  
 - story: User stops product_stock
   steps:
   - active_loop: product_stock_form
